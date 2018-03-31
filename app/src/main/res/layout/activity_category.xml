@@ -6,4 +6,11 @@
     android:layout_height="match_parent"
     tools:context="pars.androidquizapp.CategoryActivity">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="KATEGORİLER"
+        tools:layout_editor_absoluteX="87dp"
+        tools:layout_editor_absoluteY="122dp" />
 </android.support.constraint.ConstraintLayout>
