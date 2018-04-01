@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".CategoryActivity" />
-        <activity android:name=".AddCategoryActivity"></activity>
+        <activity android:name=".AddCategoryActivity" />
+        <activity android:name=".CategoriesActivity"></activity>
     </application>
 
 </manifest>
