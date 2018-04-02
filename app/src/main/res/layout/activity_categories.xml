@@ -28,7 +28,7 @@
             android:id="@+id/categoryEmptyButton"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="Ekle"
+            android:text="Add"
             android:gravity="center"
             android:layout_below="@+id/categoryEmptyTextView"
             android:visibility="invisible"/>

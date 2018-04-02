@@ -86,8 +86,7 @@ public class CategoriesActivity extends AppCompatActivity {
             case 1:
                 Intent intent2 = new Intent(CategoriesActivity.this, AddCategoryActivity.class);
                 Bundle extras2 = new Bundle();
-                extras2.putString("categoryName",(Datas.get(info.position)));
-                extras2.putInt("categoryPosition",info.position);
+                extras2.putString("categoryName","Category Name");
                 intent2.putExtras(extras2);
                 startActivity(intent2);
                 re=true;
@@ -96,8 +95,10 @@ public class CategoriesActivity extends AppCompatActivity {
             case 2:
                 Intent intent3 = new Intent(CategoriesActivity.this, DeleteCategoryActivity.class);
                 Bundle extras3 = new Bundle();
-                extras3.putString("CategoryName",(Datas.get(info.position)));
-                extras3.putInt("categoryPosition",info.position);
+                String dCatname =Datas.get(info.position).substring(4);
+                String dId = Datas.get(info.position).substring(0,1);
+                extras3.putString("categoryName",dCatname);
+                extras3.putString("categoryPosition",dId);
                 intent3.putExtras(extras3);
                 startActivity(intent3);
                 re=true;
