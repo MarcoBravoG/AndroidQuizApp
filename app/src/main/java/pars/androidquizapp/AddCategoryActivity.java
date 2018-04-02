@@ -1,11 +1,14 @@
 package pars.androidquizapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import static pars.androidquizapp.CategoriesActivity.adapter;
 
 public class AddCategoryActivity extends AppCompatActivity {
 
@@ -26,6 +29,10 @@ public class AddCategoryActivity extends AppCompatActivity {
 
                 category_name.setText("");
                 Toast.makeText(AddCategoryActivity.this, "Category Successfully Added",Toast.LENGTH_LONG).show();
+                adapter.notifyDataSetChanged();
+
+                Intent intent1 = new Intent(AddCategoryActivity.this, CategoriesActivity.class);
+                startActivity(intent1);
 
             }
         });
