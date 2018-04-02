@@ -51,6 +51,17 @@ public class Database extends SQLiteOpenHelper{
         db.close();
     }
 
+    public void UpdateCategory (String category_name,String rowId)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(ROW_CATEGORY_NAME,category_name.trim());
+
+        db.update(CATEGORIES_TABLE, cv, ROW_CATEGORY_ID + "=" + rowId, null);
+        db.close();
+    }
+
     public List<String> CategoryDataList()
     {
         List<String> datas = new ArrayList<String>();

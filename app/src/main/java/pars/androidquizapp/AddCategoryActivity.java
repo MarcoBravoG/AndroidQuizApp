@@ -27,7 +27,6 @@ public class AddCategoryActivity extends AppCompatActivity {
 
                 database.AddCategory(category_name.getText().toString());
 
-                category_name.setText("");
                 Toast.makeText(AddCategoryActivity.this, "Category Successfully Added",Toast.LENGTH_LONG).show();
                 adapter.notifyDataSetChanged();
 

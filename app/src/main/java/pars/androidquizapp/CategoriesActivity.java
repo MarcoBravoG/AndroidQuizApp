@@ -74,8 +74,10 @@ public class CategoriesActivity extends AppCompatActivity {
             case 0:
                 Intent intent1 = new Intent(CategoriesActivity.this, UpdateCategoryActivity.class);
                 Bundle extras1 = new Bundle();
-                extras1.putString("categoryName",(Datas.get(info.position)));
-                extras1.putInt("categoryPosition",info.position);
+                String Catname =Datas.get(info.position).substring(4);
+                String Id = Datas.get(info.position).substring(0,1);
+                extras1.putString("categoryName", Catname);
+                extras1.putString("categoryPosition",Id);
                 intent1.putExtras(extras1);
                 startActivity(intent1);
                 re=true;
