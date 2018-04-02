@@ -1,14 +1,23 @@
 package pars.androidquizapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoriesActivity extends AppCompatActivity {
-
+    public static List<String> Datas = new ArrayList<>();
+    public static ArrayAdapter<String> adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,9 +26,86 @@ public class CategoriesActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.CategoryListView);
 
         Database database = new Database(CategoriesActivity.this);
-        List<String> Datas = database.CategoryDataList();
+        Datas = database.CategoryDataList();
+        TextView categoryEmptyTextView = (TextView)findViewById(R.id.categoryEmptyTextView);
+        Button categoryEmptyButton = (Button)findViewById(R.id.categoryEmptyButton);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(CategoriesActivity.this,android.R.layout.simple_list_item_1,android.R.id.text1,Datas);
+        categoryEmptyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(CategoriesActivity.this, AddCategoryActivity.class);
+                Bundle extras2 = new Bundle();
+                extras2.putString("categoryName","Category Name");
+                intent2.putExtras(extras2);
+                startActivity(intent2);
+            }
+        });
+
+        if(Datas.isEmpty()) {
+            listView.setVisibility(View.INVISIBLE);
+            categoryEmptyTextView.setVisibility(View.VISIBLE);
+            categoryEmptyButton.setVisibility(View.VISIBLE);
+        }
+
+        adapter = new ArrayAdapter<String>(CategoriesActivity.this,android.R.layout.simple_list_item_1,android.R.id.text1,Datas);
         listView.setAdapter(adapter);
+
+        listView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+            @Override
+            public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+                if(v.getId() == R.id.CategoryListView) {
+                    AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+                    menu.setHeaderTitle(Datas.get(info.position));
+
+                    menu.add(0,0,0,"Update");
+                    menu.add(0,1,0,"Add");
+                    menu.add(0,2,0,"Delete");
+                }
+            }
+        });
     }
-}
+
+    public boolean onContextItemSelected(MenuItem item)
+    {
+        boolean re;
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId())
+        {
+            case 0:
+                Intent intent1 = new Intent(CategoriesActivity.this, UpdateCategoryActivity.class);
+                Bundle extras1 = new Bundle();
+                extras1.putString("categoryName",(Datas.get(info.position)));
+                extras1.putInt("categoryPosition",info.position);
+                intent1.putExtras(extras1);
+                startActivity(intent1);
+                re=true;
+                break;
+
+            case 1:
+                Intent intent2 = new Intent(CategoriesActivity.this, AddCategoryActivity.class);
+                Bundle extras2 = new Bundle();
+                extras2.putString("categoryName",(Datas.get(info.position)));
+                extras2.putInt("categoryPosition",info.position);
+                intent2.putExtras(extras2);
+                startActivity(intent2);
+                re=true;
+                break;
+
+            case 2:
+                Intent intent3 = new Intent(CategoriesActivity.this, DeleteCategoryActivity.class);
+                Bundle extras3 = new Bundle();
+                extras3.putString("CategoryName",(Datas.get(info.position)));
+                extras3.putInt("categoryPosition",info.position);
+                intent3.putExtras(extras3);
+                startActivity(intent3);
+                re=true;
+                break;
+
+            default:
+                re=false;
+                break;
+        }
+        return re;
+    }
+    }
+

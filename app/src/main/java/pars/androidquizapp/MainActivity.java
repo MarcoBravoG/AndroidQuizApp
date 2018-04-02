@@ -43,5 +43,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Veritabanından çekilerek category sayfası tekrar hazırlanacak ve kategoriler buton olarak listelenecek.
+        // category sayfasında herhangi bir kategoriye tıklayınca  10 rastgele soru gelecek soruların hepsi cevaplandığında
+        // doğru yanlış sayısını gösteren bir ekran gelecek
+
+        // Sorular tablosu veritabanına eklenecek, soru ekle güncelle ve sil sayfaları eklenecek
     }
 }
