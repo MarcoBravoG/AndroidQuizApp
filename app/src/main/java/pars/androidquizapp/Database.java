@@ -100,6 +100,23 @@ public class Database extends SQLiteOpenHelper{
         db.close();
     }
 
+    public void UpdateQuestion (String questionId,Integer question_category_id, String question, String opta, String optb,String optc,String optd,String ans)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(ROW_QUESTION_CATEGORY_ID,question_category_id);
+        cv.put(ROW_QUESTION,question);
+        cv.put(ROW_OPTA,opta);
+        cv.put(ROW_OPTB,optb);
+        cv.put(ROW_OPTC,optc);
+        cv.put(ROW_OPTD,optd);
+        cv.put(ROW_ANS,ans);
+
+        db.update(QUESTIONS_TABLE, cv, ROW_QUESTION_ID + "=" + questionId, null);
+        db.close();
+    }
+
     public void DeleteCategory (String rowId)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -126,12 +143,12 @@ public class Database extends SQLiteOpenHelper{
     {
         List<String> datas = new ArrayList<String>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] rows = {ROW_QUESTION_CATEGORY_ID,ROW_QUESTION,ROW_OPTA,ROW_OPTB,ROW_OPTC,ROW_OPTD,ROW_ANS};
+        String[] rows = {ROW_QUESTION_ID,ROW_QUESTION_CATEGORY_ID,ROW_QUESTION,ROW_OPTA,ROW_OPTB,ROW_OPTC,ROW_OPTD,ROW_ANS};
         Cursor cursor = db.query(QUESTIONS_TABLE,rows,null,null,null,null,null);
         while(cursor.moveToNext())
         {
-            datas.add("Category ID= " + cursor.getInt(0) + " Question= " + cursor.getString(1) + " Option A= " + cursor.getString(2)
-            + " Option B= " + cursor.getString(3) + " Option C= " + cursor.getString(4) + " Option D= " + cursor.getString(5) + " Answer Option= " + cursor.getString(6));
+            datas.add(cursor.getInt(0)+ "- " + " Category ID= " + cursor.getInt(1) + " Question= " + cursor.getString(2) + " Option A= " + cursor.getString(3)
+            + " Option B= " + cursor.getString(4) + " Option C= " + cursor.getString(5) + " Option D= " + cursor.getString(6) + " Answer Option= " + cursor.getString(7));
         }
 
         return  datas;
@@ -149,6 +166,28 @@ public class Database extends SQLiteOpenHelper{
         }
 
         return  datas;
+    }
+
+    public String[] getquestion(String questionId)
+    {
+        String[] datas = new String[8];
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] rows = {ROW_QUESTION_ID,ROW_QUESTION_CATEGORY_ID,ROW_QUESTION,ROW_OPTA,ROW_OPTB,ROW_OPTC,ROW_OPTD,ROW_ANS};
+        Cursor cursor = db.query(QUESTIONS_TABLE,rows,ROW_QUESTION_ID + "=?", new String[] {questionId}, null, null, null, null);
+        if(cursor != null)
+        {
+            while(cursor.moveToNext()){
+                datas[0] = Integer.toString(cursor.getInt(0)); // qid
+                datas[1] = Integer.toString(cursor.getInt(1)); // cid
+                datas[2] = cursor.getString(2); // q
+                datas[3] = cursor.getString(3); // opta
+                datas[4] = cursor.getString(4); // optb
+                datas[5] = cursor.getString(5); // optc
+                datas[6] = cursor.getString(6); // optd
+                datas[7] = cursor.getString(7); // ans
+            }
+        }
+        return datas;
     }
 
 

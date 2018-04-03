@@ -71,12 +71,20 @@ public class QuestionsActivity extends AppCompatActivity {
         switch (item.getItemId())
         {
             case 0:
-                Intent intent1 = new Intent(QuestionsActivity.this, UpdateCategoryActivity.class);
+                Intent intent1 = new Intent(QuestionsActivity.this, UpdateQuestionActivity.class);
                 Bundle extras1 = new Bundle();
-                String Catname =Datas.get(info.position).substring(4);
                 String Id = Datas.get(info.position).substring(0,1);
-                extras1.putString("categoryName", Catname);
-                extras1.putString("categoryPosition",Id);
+                Database database = new Database(QuestionsActivity.this);
+                String[] questiondata = new String[8];
+                questiondata = database.getquestion(Id);
+                extras1.putString("questionId",questiondata[0]);
+                extras1.putString("categoryId",questiondata[1]);
+                extras1.putString("question",questiondata[2]);
+                extras1.putString("opta",questiondata[3]);
+                extras1.putString("optb",questiondata[4]);
+                extras1.putString("optc",questiondata[5]);
+                extras1.putString("optd",questiondata[6]);
+                extras1.putString("ans",questiondata[7]);
                 intent1.putExtras(extras1);
                 startActivity(intent1);
                 re=true;
@@ -94,10 +102,18 @@ public class QuestionsActivity extends AppCompatActivity {
             case 2:
                 Intent intent3 = new Intent(QuestionsActivity.this, DeleteCategoryActivity.class);
                 Bundle extras3 = new Bundle();
-                String dCatname =Datas.get(info.position).substring(4);
-                String dId = Datas.get(info.position).substring(0,1);
-                extras3.putString("categoryName",dCatname);
-                extras3.putString("categoryPosition",dId);
+                String Id2 = Datas.get(info.position).substring(0,1);
+                Database database2 = new Database(QuestionsActivity.this);
+                String[] questiondata2 = new String[8];
+                questiondata = database2.getquestion(Id2);
+                extras3.putString("questionId",questiondata2[0]);
+                extras3.putString("categoryId",questiondata2[1]);
+                extras3.putString("question",questiondata2[2]);
+                extras3.putString("opta",questiondata2[3]);
+                extras3.putString("optb",questiondata2[4]);
+                extras3.putString("optc",questiondata2[5]);
+                extras3.putString("optd",questiondata2[6]);
+                extras3.putString("ans",questiondata2[7]);
                 intent3.putExtras(extras3);
                 startActivity(intent3);
                 re=true;
