@@ -13,8 +13,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import static pars.androidquizapp.CategoriesActivity.adapter;
-
 public class UpdateQuestionActivity extends AppCompatActivity {
 
     public static List<String> Datas = new ArrayList<>();

@@ -125,6 +125,14 @@ public class Database extends SQLiteOpenHelper{
         db.close();
     }
 
+    public void DeleteQuestion (String questionId)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(QUESTIONS_TABLE, ROW_QUESTION_ID + "=" + questionId, null);
+        db.close();
+    }
+
     public List<String> CategoryDataList()
     {
         List<String> datas = new ArrayList<String>();

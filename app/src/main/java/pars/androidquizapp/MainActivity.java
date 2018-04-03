@@ -57,6 +57,5 @@ public class MainActivity extends AppCompatActivity {
         // category sayfasında herhangi bir kategoriye tıklayınca  10 rastgele soru gelecek soruların hepsi cevaplandığında
         // doğru yanlış sayısını gösteren bir ekran gelecek
 
-        // güncelle ve sil sayfaları eklenecek
     }
 }

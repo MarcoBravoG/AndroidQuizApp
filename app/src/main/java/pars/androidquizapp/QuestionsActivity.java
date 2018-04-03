@@ -100,12 +100,12 @@ public class QuestionsActivity extends AppCompatActivity {
                 break;
 
             case 2:
-                Intent intent3 = new Intent(QuestionsActivity.this, DeleteCategoryActivity.class);
+                Intent intent3 = new Intent(QuestionsActivity.this, DeleteQuestionActivity.class);
                 Bundle extras3 = new Bundle();
                 String Id2 = Datas.get(info.position).substring(0,1);
                 Database database2 = new Database(QuestionsActivity.this);
                 String[] questiondata2 = new String[8];
-                questiondata = database2.getquestion(Id2);
+                questiondata2 = database2.getquestion(Id2);
                 extras3.putString("questionId",questiondata2[0]);
                 extras3.putString("categoryId",questiondata2[1]);
                 extras3.putString("question",questiondata2[2]);

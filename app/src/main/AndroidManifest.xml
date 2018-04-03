@@ -23,7 +23,8 @@
         <activity android:name=".DeleteCategoryActivity" />
         <activity android:name=".AddQuestionActivity" />
         <activity android:name=".QuestionsActivity" />
-        <activity android:name=".UpdateQuestionActivity"></activity>
+        <activity android:name=".UpdateQuestionActivity" />
+        <activity android:name=".DeleteQuestionActivity"></activity>
     </application>
 
 </manifest>
