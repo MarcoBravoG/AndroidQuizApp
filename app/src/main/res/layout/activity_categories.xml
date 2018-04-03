@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context="pars.androidquizapp.MainActivity">
+    tools:context="pars.androidquizapp.CategoriesActivity">
 
     <RelativeLayout
         android:layout_width="fill_parent"

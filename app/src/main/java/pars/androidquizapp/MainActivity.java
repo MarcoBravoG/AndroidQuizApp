@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         questionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AddQuestionActivity.class);
+                Intent intent = new Intent(MainActivity.this, QuestionsActivity.class);
                 startActivity(intent);
             }
         });
@@ -57,6 +57,6 @@ public class MainActivity extends AppCompatActivity {
         // category sayfasında herhangi bir kategoriye tıklayınca  10 rastgele soru gelecek soruların hepsi cevaplandığında
         // doğru yanlış sayısını gösteren bir ekran gelecek
 
-        // soru ekle güncelle ve sil sayfaları eklenecek
+        // güncelle ve sil sayfaları eklenecek
     }
 }

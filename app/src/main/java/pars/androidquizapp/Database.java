@@ -122,6 +122,21 @@ public class Database extends SQLiteOpenHelper{
         return  datas;
     }
 
+    public List<String> QuestionDataList()
+    {
+        List<String> datas = new ArrayList<String>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] rows = {ROW_QUESTION_CATEGORY_ID,ROW_QUESTION,ROW_OPTA,ROW_OPTB,ROW_OPTC,ROW_OPTD,ROW_ANS};
+        Cursor cursor = db.query(QUESTIONS_TABLE,rows,null,null,null,null,null);
+        while(cursor.moveToNext())
+        {
+            datas.add("Category ID= " + cursor.getInt(0) + " Question= " + cursor.getString(1) + " Option A= " + cursor.getString(2)
+            + " Option B= " + cursor.getString(3) + " Option C= " + cursor.getString(4) + " Option D= " + cursor.getString(5) + " Answer Option= " + cursor.getString(6));
+        }
+
+        return  datas;
+    }
+
     public List<String> CategoryDataNames()
     {
         List<String> datas = new ArrayList<String>();

@@ -54,8 +54,8 @@ public class AddQuestionActivity extends AppCompatActivity {
 
                 Toast.makeText(AddQuestionActivity.this, "Question Successfully Added",Toast.LENGTH_LONG).show();
 
-                //Intent intent1 = new Intent(AddQuestionActivity.this, CategoriesActivity.class);
-                //startActivity(intent1);
+                Intent intent1 = new Intent(AddQuestionActivity.this, QuestionsActivity.class);
+                startActivity(intent1);
             }
         });
 
