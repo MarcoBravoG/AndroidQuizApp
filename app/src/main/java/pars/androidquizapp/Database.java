@@ -16,12 +16,21 @@ import java.util.List;
 
 public class Database extends SQLiteOpenHelper{
     private static final String DATABASE_NAME = "quiz";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     public static final String CATEGORIES_TABLE = "categories";
     public static final String ROW_CATEGORY_ID = "category_id";
     public static final String ROW_CATEGORY_NAME = "category_name";
 
+    public static final String QUESTIONS_TABLE = "questions";
+    public static final String ROW_QUESTION_ID = "question_id";
+    public static final String ROW_QUESTION_CATEGORY_ID = "question_category_id";
+    public static final String ROW_QUESTION = "question";
+    public static final String ROW_OPTA = "opta";
+    public static final String ROW_OPTB = "optb";
+    public static final String ROW_OPTC = "optc";
+    public static final String ROW_OPTD = "optd";
+    public static final String ROW_ANS = "ans";
 
     public Database(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -32,11 +41,22 @@ public class Database extends SQLiteOpenHelper{
         db.execSQL("CREATE TABLE " + CATEGORIES_TABLE + "(" +
                 ROW_CATEGORY_ID + " INTEGER PRIMARY KEY," +
                 ROW_CATEGORY_NAME + " TEXT NOT NULL)");
+
+        db.execSQL("CREATE TABLE " + QUESTIONS_TABLE + "(" +
+                ROW_QUESTION_ID + " INTEGER PRIMARY KEY," +
+                ROW_QUESTION_CATEGORY_ID + " INTEGER NOT NULL," +
+                ROW_QUESTION + " TEXT NOT NULL," +
+                ROW_OPTA + " TEXT NOT NULL," +
+                ROW_OPTB + " TEXT NOT NULL," +
+                ROW_OPTC + " TEXT NOT NULL," +
+                ROW_OPTD + " TEXT NOT NULL," +
+                ROW_ANS + " TEXT NOT NULL)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + CATEGORIES_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QUESTIONS_TABLE);
         onCreate(db);
     }
 
@@ -48,6 +68,24 @@ public class Database extends SQLiteOpenHelper{
         cv.put(ROW_CATEGORY_NAME,category_name.trim());
 
         db.insert(CATEGORIES_TABLE, null, cv);
+        db.close();
+    }
+
+    public void AddQuestion (Integer question_category_id, String question, String opta, String optb,String optc,String optd,String ans)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(ROW_QUESTION_CATEGORY_ID,question_category_id);
+        cv.put(ROW_QUESTION,question);
+        cv.put(ROW_OPTA,opta);
+        cv.put(ROW_OPTB,optb);
+        cv.put(ROW_OPTC,optc);
+        cv.put(ROW_OPTD,optd);
+        cv.put(ROW_ANS,ans);
+
+
+        db.insert(QUESTIONS_TABLE, null, cv);
         db.close();
     }
 
