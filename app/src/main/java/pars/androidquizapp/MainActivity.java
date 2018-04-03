@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Veritabanından çekilerek category sayfası tekrar hazırlanacak ve kategoriler buton olarak listelenecek.
         // category sayfasında herhangi bir kategoriye tıklayınca  10 rastgele soru gelecek soruların hepsi cevaplandığında
         // doğru yanlış sayısını gösteren bir ekran gelecek
 

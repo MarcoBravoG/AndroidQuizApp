@@ -84,5 +84,19 @@ public class Database extends SQLiteOpenHelper{
         return  datas;
     }
 
+    public List<String> CategoryDataNames()
+    {
+        List<String> datas = new ArrayList<String>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] rows = {ROW_CATEGORY_ID,ROW_CATEGORY_NAME};
+        Cursor cursor = db.query(CATEGORIES_TABLE,rows,null,null,null,null,null);
+        while(cursor.moveToNext())
+        {
+            datas.add(cursor.getString(1));
+        }
+
+        return  datas;
+    }
+
 
 }

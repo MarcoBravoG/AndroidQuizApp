@@ -6,43 +6,11 @@ android:layout_height="match_parent"
 tools:context="pars.androidquizapp.CategoryActivity">
 
 <LinearLayout
+    android:id="@+id/mainLinearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/b1"
-            android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:layout_margin="2dp"
-            android:layout_weight="1"
-            android:background="#f0eb79"
-            android:foreground="?attr/selectableItemBackground"
-            android:paddingTop="25dp"
-            android:text="Computer"
-            android:textAllCaps="false"
-            android:textColor="#2f2e2e"
-            android:textSize="18sp" />
-
-
-        <Button
-            android:id="@+id/b2"
-            android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:layout_margin="2dp"
-            android:layout_weight="1"
-            android:background="#524d47"
-            android:foreground="?attr/selectableItemBackground"
-            android:paddingTop="25dp"
-            android:text="Sports"
-            android:textAllCaps="false"
-            android:textColor="#ffffff"
-            android:textSize="18sp" />
-    </LinearLayout>
 </LinearLayout>
 </ScrollView>
