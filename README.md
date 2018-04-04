@@ -8,7 +8,7 @@ When the game starts, the category selection screen appears. A new game is start
 When the game is over, a screen appears telling you how many questions you have made correctly and incorrectly and your score.
 
 <center>
-![mainpage.png](https://cdn.utopian.io/posts/7b51126136d9b6ec9341982cfb3a0a27928amainpage.png)
+ <img src="https://cdn.utopian.io/posts/7b51126136d9b6ec9341982cfb3a0a27928amainpage.png" alt="Mountain View">
 </center>
 
 ### Technology Stack
