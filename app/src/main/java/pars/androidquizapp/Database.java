@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -197,6 +196,24 @@ public class Database extends SQLiteOpenHelper{
         }
         return datas;
     }
+
+    public List<Integer>getQuestionsIDs()
+    {
+        List<Integer> datas = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] rows = {ROW_QUESTION_ID};
+        Cursor cursor = db.query(QUESTIONS_TABLE,rows,null,null, null, null, null, null);
+        if(cursor != null)
+        {
+            while(cursor.moveToNext())
+            {
+                datas.add(cursor.getInt(0));
+            }
+        }
+        return datas;
+    }
+
+
 
 
 }

@@ -24,7 +24,8 @@
         <activity android:name=".AddQuestionActivity" />
         <activity android:name=".QuestionsActivity" />
         <activity android:name=".UpdateQuestionActivity" />
-        <activity android:name=".DeleteQuestionActivity"></activity>
+        <activity android:name=".DeleteQuestionActivity" />
+        <activity android:name=".MainGameActivity"></activity>
     </application>
 
 </manifest>
