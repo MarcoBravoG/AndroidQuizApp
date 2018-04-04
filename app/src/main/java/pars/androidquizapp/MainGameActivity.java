@@ -1,16 +1,15 @@
 package pars.androidquizapp;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,16 +49,21 @@ public class MainGameActivity extends AppCompatActivity {
             public void onClick(View view) {
             if(questiondata[7].equals("a") || questiondata[7].equals("A"))
             {
-                    buttonA.setBackgroundColor(Color.parseColor("#008000"));
+                buttonA.setBackgroundColor(Color.parseColor("#008000"));
+                correct++;
 
                 if(index < Datas.size() - 1)
                 {
-                    correct++;
                     disableButton();
                     correctDialog("#008000","Correct");
                 }
                 else{
-                    Toast.makeText(MainGameActivity.this, "RESULT PAGE", Toast.LENGTH_SHORT).show();
+                    Intent intent2 = new Intent(MainGameActivity.this, QuizResultActivity.class);
+                    Bundle extras2 = new Bundle();
+                    extras2.putInt("correct",correct);
+                    extras2.putInt("incorrect",incorrect);
+                    intent2.putExtras(extras2);
+                    startActivity(intent2);
                 }
 
             }
@@ -67,14 +71,19 @@ public class MainGameActivity extends AppCompatActivity {
             else
             {
                 buttonA.setBackgroundColor(Color.parseColor("#FF0000"));
+                incorrect++;
                 if(index < Datas.size() - 1)
                 {
-                    incorrect++;
                     disableButton();
                     correctDialog("#FF0000","Incorrect");
                 }
                 else{
-                    Toast.makeText(MainGameActivity.this, "RESULT PAGE", Toast.LENGTH_SHORT).show();
+                    Intent intent2 = new Intent(MainGameActivity.this, QuizResultActivity.class);
+                    Bundle extras2 = new Bundle();
+                    extras2.putInt("correct",correct);
+                    extras2.putInt("incorrect",incorrect);
+                    intent2.putExtras(extras2);
+                    startActivity(intent2);
                 }
             }
             }
@@ -86,15 +95,19 @@ public class MainGameActivity extends AppCompatActivity {
                 if(questiondata[7].equals("b") || questiondata[7].equals("B"))
                 {
                     buttonB.setBackgroundColor(Color.parseColor("#008000"));
-
+                    correct++;
                     if(index < Datas.size() - 1)
                     {
-                        correct++;
                         disableButton();
                         correctDialog("#008000","Correct");
                     }
                     else{
-                        Toast.makeText(MainGameActivity.this, "RESULT PAGE", Toast.LENGTH_SHORT).show();
+                        Intent intent2 = new Intent(MainGameActivity.this, QuizResultActivity.class);
+                        Bundle extras2 = new Bundle();
+                        extras2.putInt("correct",correct);
+                        extras2.putInt("incorrect",incorrect);
+                        intent2.putExtras(extras2);
+                        startActivity(intent2);
                     }
 
                 }
@@ -102,14 +115,19 @@ public class MainGameActivity extends AppCompatActivity {
                 else
                 {
                     buttonB.setBackgroundColor(Color.parseColor("#FF0000"));
+                    incorrect++;
                     if(index < Datas.size() - 1)
                     {
-                        incorrect++;
                         disableButton();
                         correctDialog("#FF0000","Incorrect");
                     }
                     else{
-                        Toast.makeText(MainGameActivity.this, "RESULT PAGE", Toast.LENGTH_SHORT).show();
+                        Intent intent2 = new Intent(MainGameActivity.this, QuizResultActivity.class);
+                        Bundle extras2 = new Bundle();
+                        extras2.putInt("correct",correct);
+                        extras2.putInt("incorrect",incorrect);
+                        intent2.putExtras(extras2);
+                        startActivity(intent2);
                     }
                 }
             }
@@ -121,15 +139,19 @@ public class MainGameActivity extends AppCompatActivity {
                 if(questiondata[7].equals("C") || questiondata[7].equals("C"))
                 {
                     buttonC.setBackgroundColor(Color.parseColor("#008000"));
-
+                    correct++;
                     if(index < Datas.size() - 1)
                     {
-                        correct++;
                         disableButton();
                         correctDialog("#008000","Correct");
                     }
                     else{
-                        Toast.makeText(MainGameActivity.this, "RESULT PAGE", Toast.LENGTH_SHORT).show();
+                        Intent intent2 = new Intent(MainGameActivity.this, QuizResultActivity.class);
+                        Bundle extras2 = new Bundle();
+                        extras2.putInt("correct",correct);
+                        extras2.putInt("incorrect",incorrect);
+                        intent2.putExtras(extras2);
+                        startActivity(intent2);
                     }
 
                 }
@@ -137,14 +159,19 @@ public class MainGameActivity extends AppCompatActivity {
                 else
                 {
                     buttonC.setBackgroundColor(Color.parseColor("#FF0000"));
+                    incorrect++;
                     if(index < Datas.size() - 1)
                     {
-                        incorrect++;
                         disableButton();
                         correctDialog("#FF0000","Incorrect");
                     }
                     else{
-                        Toast.makeText(MainGameActivity.this, "RESULT PAGE", Toast.LENGTH_SHORT).show();
+                        Intent intent2 = new Intent(MainGameActivity.this, QuizResultActivity.class);
+                        Bundle extras2 = new Bundle();
+                        extras2.putInt("correct",correct);
+                        extras2.putInt("incorrect",incorrect);
+                        intent2.putExtras(extras2);
+                        startActivity(intent2);
                     }
                 }
             }
@@ -156,15 +183,19 @@ public class MainGameActivity extends AppCompatActivity {
                 if(questiondata[7].equals("d") || questiondata[7].equals("D"))
                 {
                     buttonD.setBackgroundColor(Color.parseColor("#008000"));
-
+                    correct++;
                     if(index < Datas.size() - 1)
                     {
-                        correct++;
                         disableButton();
                         correctDialog("#008000","Correct");
                     }
                     else{
-                        Toast.makeText(MainGameActivity.this, "RESULT PAGE", Toast.LENGTH_SHORT).show();
+                        Intent intent2 = new Intent(MainGameActivity.this, QuizResultActivity.class);
+                        Bundle extras2 = new Bundle();
+                        extras2.putInt("correct",correct);
+                        extras2.putInt("incorrect",incorrect);
+                        intent2.putExtras(extras2);
+                        startActivity(intent2);
                     }
 
                 }
@@ -172,14 +203,19 @@ public class MainGameActivity extends AppCompatActivity {
                 else
                 {
                     buttonD.setBackgroundColor(Color.parseColor("#FF0000"));
+                    incorrect++;
                     if(index < Datas.size() - 1)
                     {
-                        incorrect++;
                         disableButton();
                         correctDialog("#FF0000","Incorrect");
                     }
                     else{
-                        Toast.makeText(MainGameActivity.this, "RESULT PAGE", Toast.LENGTH_SHORT).show();
+                        Intent intent2 = new Intent(MainGameActivity.this, QuizResultActivity.class);
+                        Bundle extras2 = new Bundle();
+                        extras2.putInt("correct",correct);
+                        extras2.putInt("incorrect",incorrect);
+                        intent2.putExtras(extras2);
+                        startActivity(intent2);
                     }
                 }
             }
