@@ -24,7 +24,7 @@ public class MainGameActivity extends AppCompatActivity {
     Integer index = 0 , correct = 0, incorrect = 0;
     String[] questiondata = new String[8];
     Database database = new Database(MainGameActivity.this);
-
+    String CatId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +36,8 @@ public class MainGameActivity extends AppCompatActivity {
         buttonC = (Button) findViewById(R.id.buttonC);
         buttonD = (Button) findViewById(R.id.buttonD);
 
-        Datas = database.getQuestionsIDs();
+        CatId = getIntent().getExtras().getString("catId");
+        Datas = database.getQuestionsIDs(CatId);
 
         Collections.shuffle(Datas);
 

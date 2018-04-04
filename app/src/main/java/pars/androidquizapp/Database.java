@@ -169,7 +169,7 @@ public class Database extends SQLiteOpenHelper{
         Cursor cursor = db.query(CATEGORIES_TABLE,rows,null,null,null,null,null);
         while(cursor.moveToNext())
         {
-            datas.add(cursor.getString(1));
+            datas.add(cursor.getString(0)+ "-" +cursor.getString(1));
         }
 
         return  datas;
@@ -197,12 +197,12 @@ public class Database extends SQLiteOpenHelper{
         return datas;
     }
 
-    public List<Integer>getQuestionsIDs()
+    public List<Integer>getQuestionsIDs(String catId)
     {
         List<Integer> datas = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String[] rows = {ROW_QUESTION_ID};
-        Cursor cursor = db.query(QUESTIONS_TABLE,rows,null,null, null, null, null, null);
+        Cursor cursor = db.query(QUESTIONS_TABLE,rows,ROW_QUESTION_CATEGORY_ID + "=?", new String[] {catId}, null, null, null, null);
         if(cursor != null)
         {
             while(cursor.moveToNext())
