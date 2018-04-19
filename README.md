@@ -7,9 +7,6 @@ When the game starts, the category selection screen appears. A new game is start
 
 When the game is over, a screen appears telling you how many questions you have made correctly and incorrectly and your score.
 
-<center>
- <img src="https://cdn.utopian.io/posts/7b51126136d9b6ec9341982cfb3a0a27928amainpage.png" alt="Mountain View">
-</center>
 
 ### Technology Stack
 
@@ -22,9 +19,6 @@ When the game is over, a screen appears telling you how many questions you have 
 ### Roadmap
 
 It looks a little bad now as a design. In the future, I will concentrate especially on design. I will continue to make improvements to make it more functional.
-
-### Review of App (Video)
-https://youtu.be/dzDWPXLFpro
 
 ### Install
 
