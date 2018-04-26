@@ -1,3 +1,4 @@
+/*
 package pars.androidquizapp;
 
 import android.content.Intent;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import pars.androidquizapp.question.view.AddQuestionActivity;
 
 public class QuestionsActivity extends AppCompatActivity {
     public static List<String> Datas = new ArrayList<>();
@@ -126,3 +129,4 @@ public class QuestionsActivity extends AppCompatActivity {
         return re;
     }
 }
+*/

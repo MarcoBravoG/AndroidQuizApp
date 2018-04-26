@@ -1,3 +1,4 @@
+/*
 package pars.androidquizapp;
 
 import android.content.Intent;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import pars.androidquizapp.category.view.AddCategoryActivity;
 
 public class CategoriesActivity extends AppCompatActivity {
     public static List<String> Datas = new ArrayList<>();
@@ -65,7 +68,8 @@ public class CategoriesActivity extends AppCompatActivity {
         });
     }
 
-    public boolean onContextItemSelected(MenuItem item)
+    */
+/*public boolean onContextItemSelected(MenuItem item)
     {
         boolean re;
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
@@ -109,6 +113,8 @@ public class CategoriesActivity extends AppCompatActivity {
                 break;
         }
         return re;
-    }
-    }
+    }*//*
 
+}
+
+*/

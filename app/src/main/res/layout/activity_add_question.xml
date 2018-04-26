@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pars.androidquizapp.AddQuestionActivity">
+    tools:context="pars.androidquizapp.question.view.AddQuestionActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -16,7 +16,7 @@
         <Spinner
             android:id="@+id/question_category"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:hint="Select Category" />
 
         <EditText
@@ -62,7 +62,9 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:padding="12dp"
-            android:text="Add"/>
+            android:text="Add"
+            android:textColor="@color/white"
+            android:background="@color/colorAccent"/>
 
     </LinearLayout>
 

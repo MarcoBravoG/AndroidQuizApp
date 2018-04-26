@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">AndroidQuizApp</string>
+    <string name="app_name">Android QuizApp</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_playGame">Play Game</string>
+
 </resources>
