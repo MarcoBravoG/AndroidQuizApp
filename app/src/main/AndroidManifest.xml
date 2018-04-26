@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+
+        <activity
+            android:name=".HomeActivity"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,16 +20,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".CategoryActivity" />
-        <activity android:name=".AddCategoryActivity" />
-        <activity android:name=".CategoriesActivity" />
-        <activity android:name=".UpdateCategoryActivity" />
-        <activity android:name=".DeleteCategoryActivity" />
-        <activity android:name=".AddQuestionActivity" />
-        <activity android:name=".QuestionsActivity" />
-        <activity android:name=".UpdateQuestionActivity" />
-        <activity android:name=".DeleteQuestionActivity" />
+        <activity android:name=".category.view.AddCategoryActivity" />
+        <!--<activity android:name=".CategoriesActivity" />-->
+        <activity android:name=".question.view.AddQuestionActivity" />
+        <!--<activity android:name=".QuestionsActivity" />-->
         <activity android:name=".MainGameActivity" />
-        <activity android:name=".QuizResultActivity"></activity>
+        <activity android:name=".QuizResultActivity" />
+
     </application>
 
 </manifest>
