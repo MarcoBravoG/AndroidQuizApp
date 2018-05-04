@@ -4,31 +4,48 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import pars.androidquizapp.database.Category;
+import pars.androidquizapp.database.CategoryDatabase;
+import pars.androidquizapp.database.Question;
 
 // 10 soru limiti ve kategori where konulacak -> getQuestionsIDs metoduna
 
 public class MainGameActivity extends AppCompatActivity {
-    public static List<Integer> Datas = new ArrayList<>();
+
+    public static List<String> data = new ArrayList<>();
     Button buttonA, buttonB, buttonC, buttonD;
     TextView question;
     Integer index = 0 , correct = 0, incorrect = 0;
+    Object[] questionSet = new Object[8];
     String[] questiondata = new String[8];
-    Database database = new Database(MainGameActivity.this);
-    String CatId;
+    List<Question> questionData;
+
+    public CategoryDatabase categoryDatabase;
+    public List<Question> questions;
+
+    String catId;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_game);
+        categoryDatabase = CategoryDatabase.getInstance(this);
 
         question = (TextView) findViewById(R.id.question);
         buttonA = (Button) findViewById(R.id.buttonA);
@@ -36,12 +53,38 @@ public class MainGameActivity extends AppCompatActivity {
         buttonC = (Button) findViewById(R.id.buttonC);
         buttonD = (Button) findViewById(R.id.buttonD);
 
-        CatId = getIntent().getExtras().getString("catId");
-        Datas = database.getQuestionsIDs(CatId);
+        catId = getIntent().getExtras().getString("cat");
+        //catId = getIntent().getExtras().getString("catId");
+        Log.e("catId", "this is the passed id: " + catId);
 
-        Collections.shuffle(Datas);
+        questions = categoryDatabase.questionDao().getAllQuestions();
+        //Log.e("QUESTIONS", "these are: " + questions);
 
-        questiondata = database.getquestion(Integer.toString(Datas.get(index)));
+        for (Question que : questions) {
+            data.add(que.getQuestionCategory());
+        }
+        //Log.e("DATA ID", "this are: " + data);
+
+        for(int i=0; i<data.size(); i++){
+            Log.e("DATA ID", "this are: " + data.get(i));
+            if(data.get(i).equals(catId)){
+                questionData = categoryDatabase.questionDao().queryQuestion(data.get(i));
+                Log.e("CAT QUESTION", "this is: " + questionData);
+            }
+
+        }
+        for(int i=0; i<questionData.size(); i++){
+            questionSet[i] = String.valueOf(questionData.get(i));
+            Log.e("NEW QUESTION", "this are: " + questionSet[i]);
+        }
+
+        questiondata = Arrays.copyOf(questionSet, questionSet.length, String[].class);
+
+        Log.e("FINAL QUESTION", "this are: " + Arrays.toString(questiondata));
+
+        Collections.shuffle(questionData);
+
+        //questiondata = database.getquestion(Integer.toString(Datas.get(index)));
 
         updateQuestion();
 
@@ -53,7 +96,7 @@ public class MainGameActivity extends AppCompatActivity {
                 buttonA.setBackgroundColor(Color.parseColor("#008000"));
                 correct++;
 
-                if(index < Datas.size() - 1)
+                if(index < data.size() - 1)
                 {
                     disableButton();
                     correctDialog("#008000","Correct");
@@ -73,7 +116,7 @@ public class MainGameActivity extends AppCompatActivity {
             {
                 buttonA.setBackgroundColor(Color.parseColor("#FF0000"));
                 incorrect++;
-                if(index < Datas.size() - 1)
+                if(index < data.size() - 1)
                 {
                     disableButton();
                     correctDialog("#FF0000","Incorrect");
@@ -97,7 +140,7 @@ public class MainGameActivity extends AppCompatActivity {
                 {
                     buttonB.setBackgroundColor(Color.parseColor("#008000"));
                     correct++;
-                    if(index < Datas.size() - 1)
+                    if(index < data.size() - 1)
                     {
                         disableButton();
                         correctDialog("#008000","Correct");
@@ -117,7 +160,7 @@ public class MainGameActivity extends AppCompatActivity {
                 {
                     buttonB.setBackgroundColor(Color.parseColor("#FF0000"));
                     incorrect++;
-                    if(index < Datas.size() - 1)
+                    if(index < data.size() - 1)
                     {
                         disableButton();
                         correctDialog("#FF0000","Incorrect");
@@ -141,7 +184,7 @@ public class MainGameActivity extends AppCompatActivity {
                 {
                     buttonC.setBackgroundColor(Color.parseColor("#008000"));
                     correct++;
-                    if(index < Datas.size() - 1)
+                    if(index < data.size() - 1)
                     {
                         disableButton();
                         correctDialog("#008000","Correct");
@@ -161,7 +204,7 @@ public class MainGameActivity extends AppCompatActivity {
                 {
                     buttonC.setBackgroundColor(Color.parseColor("#FF0000"));
                     incorrect++;
-                    if(index < Datas.size() - 1)
+                    if(index < data.size() - 1)
                     {
                         disableButton();
                         correctDialog("#FF0000","Incorrect");
@@ -185,7 +228,7 @@ public class MainGameActivity extends AppCompatActivity {
                 {
                     buttonD.setBackgroundColor(Color.parseColor("#008000"));
                     correct++;
-                    if(index < Datas.size() - 1)
+                    if(index < data.size() - 1)
                     {
                         disableButton();
                         correctDialog("#008000","Correct");
@@ -205,7 +248,7 @@ public class MainGameActivity extends AppCompatActivity {
                 {
                     buttonD.setBackgroundColor(Color.parseColor("#FF0000"));
                     incorrect++;
-                    if(index < Datas.size() - 1)
+                    if(index < data.size() - 1)
                     {
                         disableButton();
                         correctDialog("#FF0000","Incorrect");
@@ -276,7 +319,7 @@ public class MainGameActivity extends AppCompatActivity {
 
                 index++;
 
-                questiondata = database.getquestion(Integer.toString(Datas.get(index)));
+                //questiondata = database.getquestion(Integer.toString(Datas.get(index)));
 
                 updateQuestion();
 
@@ -286,4 +329,5 @@ public class MainGameActivity extends AppCompatActivity {
             }
         });
     }
+
 }
