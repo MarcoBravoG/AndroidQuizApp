@@ -5,4 +5,11 @@ package pars.androidquizapp.addquestion;
  */
 
 public interface AddQuestionContract {
+
+    interface UserActionsListener{
+
+        void addQuestion(int id, String Category, String Question, String optionA,
+                         String optionB, String optionC,String optionD,
+                         String answer);
+    }
 }

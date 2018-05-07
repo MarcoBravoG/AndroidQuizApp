@@ -5,4 +5,10 @@ package pars.androidquizapp.splashscreen;
  */
 
 public interface SplashScreenContract {
+
+    interface UserActionsListener {
+
+        void takeQuiz();
+    }
+
 }
