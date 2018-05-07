@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashScreenActivity">
+        <activity android:name=".splashscreen.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,21 +17,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".category.view.CategoriesActivity"
+            android:name=".categories.CategoriesActivity"
             android:label="@string/title_activity_categories"
             android:theme="@style/AppTheme" />
-
-        <activity
-            android:name=".HomeActivity"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".CategoryActivity" />
-        <activity android:name=".category.view.AddCategoryActivity" />
-        <!-- <activity android:name=".CategoriesActivity" /> -->
-        <activity android:name=".question.view.AddQuestionActivity" />
-        <!-- <activity android:name=".QuestionsActivity" /> -->
-        <activity android:name=".MainGameActivity" />
-        <activity android:name=".QuizResultActivity" />
-
+        <activity android:name=".addquestion.AddQuestionActivity" />
+        <activity android:name=".questions.QuestionsActivity" />
+        <activity android:name=".playquiz.PlayQuizActivity"/>
     </application>
 
 </manifest>
