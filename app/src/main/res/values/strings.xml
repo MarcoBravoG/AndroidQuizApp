@@ -4,5 +4,9 @@
 
 
     <string name="title_activity_categories">Categories</string>
+    <string name="play_quiz">Play Quiz</string>
+    <string name="add_question">Add Question</string>
+    <string name="category_title">Football</string>
+    <string name="question_count">10Q</string>
 
 </resources>

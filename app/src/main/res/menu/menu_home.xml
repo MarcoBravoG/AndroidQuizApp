@@ -4,9 +4,9 @@
     tools:context="pars.androidquizapp.HomeActivity">
 
     <item
-        android:id="@+id/action_play_game"
+        android:id="@+id/action_add_question"
         android:orderInCategory="100"
-        android:title="@string/action_playGame"
+        android:title="@string/add_question"
         app:showAsAction="never" />
 
 </menu>

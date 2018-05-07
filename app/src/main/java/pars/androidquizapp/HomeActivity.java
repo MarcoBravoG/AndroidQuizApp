@@ -102,9 +102,9 @@ public class HomeActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_play_game) {
+        /*if (id == R.id.action_play_game) {
             startActivity(new Intent(HomeActivity.this, CategoryActivity.class));
-        }
+        }*/
         return super.onOptionsItemSelected(item);
     }
 

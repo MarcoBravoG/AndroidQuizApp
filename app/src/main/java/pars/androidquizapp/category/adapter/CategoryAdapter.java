@@ -46,8 +46,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @Override
     public void onBindViewHolder(CategoryViewHolder holder, int position) {
         Category result = categoryList.get(position);
-        holder.categoryName.setText(result.getCategory());
-        holder.categoryId.setText(String.valueOf(result.getId())+ ".");
+        //holder.categoryName.setText(result.getCategory());
+        //holder.categoryId.setText(String.valueOf(result.getId())+ ".");
     }
 
     @Override
@@ -58,10 +58,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     public class CategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        @BindView(R.id.category_name)
+        /*@BindView(R.id.category_name)
         TextView categoryName;
         @BindView(R.id.category_id)
-        TextView categoryId;
+        TextView categoryId;*/
 
         public CategoryViewHolder(View itemView) {
             super(itemView);
