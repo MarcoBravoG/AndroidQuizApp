@@ -10,20 +10,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity
-            android:name=".HomeActivity"
-            android:theme="@style/AppTheme">
+        <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <activity
+            android:name=".HomeActivity"
+            android:theme="@style/AppTheme" />
         <activity android:name=".CategoryActivity" />
         <activity android:name=".category.view.AddCategoryActivity" />
-        <!--<activity android:name=".CategoriesActivity" />-->
+        <!-- <activity android:name=".CategoriesActivity" /> -->
         <activity android:name=".question.view.AddQuestionActivity" />
-        <!--<activity android:name=".QuestionsActivity" />-->
+        <!-- <activity android:name=".QuestionsActivity" /> -->
         <activity android:name=".MainGameActivity" />
         <activity android:name=".QuizResultActivity" />
 
