@@ -6,7 +6,7 @@ android:layout_height="match_parent"
 android:orientation="vertical"
 android:gravity="center"
 android:background="#455a64"
-tools:context="pars.androidquizapp.MainActivity">
+tools:context="pars.androidquizapp.HomeActivity">
 <TextView
     android:id="@+id/Titletext"
     android:layout_width="match_parent"
@@ -22,8 +22,7 @@ tools:context="pars.androidquizapp.MainActivity">
 
 <ImageView
     android:layout_width="200dp"
-    android:layout_height="200dp"
-    android:src="@drawable/qlogo"/>
+    android:layout_height="200dp" />
 
 <Button
     android:id="@+id/playButton"
