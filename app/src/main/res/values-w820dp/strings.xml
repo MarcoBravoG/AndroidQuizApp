@@ -4,4 +4,5 @@
     <string name="category_title">Football</string>
     <string name="question_count">10Q</string>
     <string name="empty_view">No Category Found, Let\'s Add Some!</string>
+    <string name="take_quiz">Take Quiz</string>
 </resources>

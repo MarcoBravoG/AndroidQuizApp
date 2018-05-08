@@ -41,7 +41,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
 
     @Override
     public void onBindViewHolder(QuestionsAdapter.QuestionViewHolder holder, int position) {
-        Question data = questionList.get(position);
+       /* Question data = questionList.get(position);
         holder.questionId.setText(String.valueOf(data.getId())+".");
         holder.questionCategoryName.setText("Category: "+ data.getQuestionCategory());
         holder.questionView.setText(data.getQuestion());
@@ -50,7 +50,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
                 " C) "+ data.getOptionC()+
                 " D) "+ data.getOptionD());
         holder.questionAnswer.setText("Ans: "+ data.getAnswerOoption());
-    }
+    */}
 
     @Override
     public int getItemCount() {
@@ -59,7 +59,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
 
     public class QuestionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @BindView(R.id.question_id)
+        /*@BindView(R.id.question_id)
         TextView questionId;
         @BindView(R.id.question_category_name)
         TextView questionCategoryName;
@@ -68,7 +68,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
         @BindView(R.id.options)
         TextView optionsView;
         @BindView(R.id.answer)
-        TextView questionAnswer;
+        TextView questionAnswer;*/
 
         public QuestionViewHolder(View itemView) {
             super(itemView);

@@ -4,9 +4,6 @@ import java.util.List;
 
 import pars.androidquizapp.data.Category;
 
-/**
- * Created by Princess on 07/05/2018.
- */
 
 public interface CategoriesContract {
 

@@ -10,15 +10,12 @@ import java.util.List;
 
 import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 
-/**
- * Created by Princess on 16/04/2018.
- */
 
 @Dao
 public interface CategoryDao {
 
     @Insert(onConflict = REPLACE)
-    long save(Category category);
+    long insert(Category category);
 
     @Query("SELECT * FROM categories_table")
     List<Category> getAllCategories();

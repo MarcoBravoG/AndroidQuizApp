@@ -2,15 +2,20 @@ package pars.androidquizapp.categories;
 
 import pars.androidquizapp.data.Category;
 
-/**
- * Created by Princess on 07/05/2018.
- */
 
 public class CategoriesPresenter implements CategoriesContract.UserActionsListener {
 
+    private CategoriesContract.View mCatgeoriesView;
+
+
+    public CategoriesPresenter(CategoriesContract.View mCatgeoriesView) {
+        this.mCatgeoriesView = mCatgeoriesView;
+    }
 
     @Override
     public void addNewCategory() {
+
+        mCatgeoriesView.showAddCategory();
 
     }
 

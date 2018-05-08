@@ -7,4 +7,5 @@
     <dimen name="play_quiz_text_size">14sp</dimen>
     <dimen name="card_view_content_bottom_margin">20dp</dimen>
     <dimen name="category_text_size">20sp</dimen>
+    <dimen name="take_quiz">24sp</dimen>
 </resources>

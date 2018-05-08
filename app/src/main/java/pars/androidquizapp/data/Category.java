@@ -7,9 +7,6 @@ import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 
-/**
- * Created by Princess on 16/04/2018.
- */
 
 @Entity(tableName = "categories_table")
 public class Category implements Serializable{
