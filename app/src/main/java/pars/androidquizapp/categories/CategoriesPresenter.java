@@ -1,21 +1,25 @@
 package pars.androidquizapp.categories;
 
+import org.jetbrains.annotations.NotNull;
+
 import pars.androidquizapp.data.Category;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 
 public class CategoriesPresenter implements CategoriesContract.UserActionsListener {
 
-    private CategoriesContract.View mCatgeoriesView;
+    private CategoriesContract.View categoriesView;
 
 
-    public CategoriesPresenter(CategoriesContract.View mCatgeoriesView) {
-        this.mCatgeoriesView = mCatgeoriesView;
+    public CategoriesPresenter(@NotNull CategoriesContract.View mCatgeoriesView) {
+        categoriesView = checkNotNull(mCatgeoriesView, "categoryView cannot be null");
     }
 
     @Override
     public void addNewCategory() {
 
-        mCatgeoriesView.showAddCategory();
+        categoriesView.showAddCategory();
 
     }
 

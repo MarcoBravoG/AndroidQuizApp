@@ -1,12 +1,17 @@
 package pars.androidquizapp.categories;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -18,6 +23,9 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
 
 
     private CategoriesContract.UserActionsListener mActionListener;
+    private CategoriesAdapter categoriesAdapter;
+    private AlertDialog alertDialog = null;
+
 
     public CategoriesFragment() {
         // Required empty public constructor
@@ -39,18 +47,22 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_categories, container, false);
 
+        return root;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
         FloatingActionButton fab = getActivity().findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                mActionListener.addNewCategory();
             }
         });
-
-        return root;
     }
-
 
     @Override
     public void onResume() {
@@ -71,10 +83,32 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
     @Override
     public void showAddCategory() {
 
+        //Create an alert dialog builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        //Set title value
+        builder.setTitle("Add Categories");
+
+        //Get custom view
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.add_category_dialog, null);
+        builder.setView(dialogView);
+
+        final EditText editText = dialogView.findViewById(R.id.category_name);
+        final Button addCategory = dialogView.findViewById(R.id.add_category);
+
+        addCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Added Successfully", Toast.LENGTH_SHORT).show();
+            }
+        });
+        alertDialog = builder.create();
+        alertDialog.show();
     }
 
 
-    public interface OnCategoryItemListener {
-        void onCategoryClicked(Category clickedCategory);
-    }
+//    public interface OnCategoryItemListener {
+//        void onCategoryClicked(Category clickedCategory);
+//    }
 }
