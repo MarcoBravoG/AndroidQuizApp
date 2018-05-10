@@ -1,17 +1,18 @@
 package pars.androidquizapp.categories;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.View;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import pars.androidquizapp.R;
+import pars.androidquizapp.addquestion.AddQuestionActivity;
 
 public class CategoriesActivity extends AppCompatActivity {
 
@@ -38,11 +39,19 @@ public class CategoriesActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return true;
     }
 
     @Override
-    public void onOptionsMenuClosed(Menu menu) {
-        super.onOptionsMenuClosed(menu);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if(id == R.id.action_add_question){
+            //Toast.makeText(this, "Selected", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(CategoriesActivity.this, AddQuestionActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -2,21 +2,25 @@ package pars.androidquizapp.categories;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import pars.androidquizapp.R;
 import pars.androidquizapp.data.Category;
+import pars.androidquizapp.util.EmptyRecyclerView;
 
 
 public class CategoriesFragment extends Fragment implements CategoriesContract.View{
@@ -25,6 +29,12 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
     private CategoriesContract.UserActionsListener mActionListener;
     private CategoriesAdapter categoriesAdapter;
     private AlertDialog alertDialog = null;
+    //private EmptyRecyclerView emptyRecyclerView;
+
+    @BindView(R.id.tv_empty)
+    TextView emptyTextView;
+    @BindView(R.id.recycler_view)
+    EmptyRecyclerView recyclerView;
 
 
     public CategoriesFragment() {
@@ -47,6 +57,9 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_categories, container, false);
 
+        ButterKnife.bind(this, root);
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        recyclerView.setEmptyView(root.findViewById(R.id.tv_empty));
         return root;
     }
 
@@ -67,12 +80,6 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
     @Override
     public void onResume() {
         super.onResume();
-        mActionListener = null;
-    }
-
-    @Override
-    public void showEmptyContentMessage() {
-
     }
 
     @Override
@@ -108,7 +115,8 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
     }
 
 
-//    public interface OnCategoryItemListener {
+    //    public interface OnCategoryItemListener {
 //        void onCategoryClicked(Category clickedCategory);
 //    }
+
 }

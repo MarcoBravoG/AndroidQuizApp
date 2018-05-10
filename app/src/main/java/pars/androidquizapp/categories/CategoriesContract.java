@@ -9,8 +9,6 @@ public interface CategoriesContract {
 
     interface View {
 
-        void showEmptyContentMessage();
-
         void showCategories(List<Category> category);
 
         void showAddCategory();

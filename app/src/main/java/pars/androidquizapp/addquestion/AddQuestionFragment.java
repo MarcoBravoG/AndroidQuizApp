@@ -16,6 +16,10 @@ public class AddQuestionFragment extends Fragment{
         // Required empty public constructor
     }
 
+    public static AddQuestionFragment newInstance() {
+        return new AddQuestionFragment();
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
