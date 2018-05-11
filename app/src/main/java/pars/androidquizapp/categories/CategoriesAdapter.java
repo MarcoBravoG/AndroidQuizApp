@@ -17,9 +17,6 @@ import butterknife.ButterKnife;
 import pars.androidquizapp.R;
 import pars.androidquizapp.data.Category;
 
-/**
- * Created by Princess on 15/04/2018.
- */
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoryViewHolder> {
 
@@ -48,7 +45,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     public void onBindViewHolder(CategoryViewHolder holder, int position) {
         Category result = categoryList.get(position);
         holder.categoryTitle.setText(result.getCategory());
-        //holder.categoryId.setText(String.valueOf(result.getId())+ ".");
     }
 
     @Override
@@ -56,6 +52,14 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         return categoryList.size();
     }
 
+    public Category getItem(int position){
+        return categoryList.get(position);
+    }
+
+    public void setValues(List<Category> values){
+        categoryList = values;
+        notifyDataSetChanged();
+    }
 
     public class CategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
@@ -76,13 +80,14 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
         @Override
         public void onClick(View v) {
-            onCategoryClicked.onClick(getAdapterPosition());
+            int position = getAdapterPosition();
+            Category category = getItem(position);
+            onCategoryClicked.onCategoryClick(category);
         }
     }
 
     public interface OnCategoryClicked {
-        //void onClick(Category data);
-        void onClick(int position);
+        void onCategoryClick(Category category);
     }
 
 }

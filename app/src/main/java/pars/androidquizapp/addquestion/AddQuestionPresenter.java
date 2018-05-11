@@ -8,7 +8,8 @@ public class AddQuestionPresenter implements AddQuestionContract.UserActionsList
 
 
     @Override
-    public void addQuestion(int id, String Category, String Question, String optionA, String optionB, String optionC, String optionD, String answer) {
+    public void addQuestion(int id, String Category, String Question, String optionA,
+                            String optionB, String optionC, String optionD, String answer) {
 
     }
 }

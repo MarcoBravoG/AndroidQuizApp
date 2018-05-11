@@ -5,4 +5,5 @@
     <dimen name="activity_horizontal_margin">64dp</dimen>
     <dimen name="play_quiz_text_size">14sp</dimen>
     <dimen name="card_view_content_bottom_margin">20dp</dimen>
+    <dimen name="frame_layout_margin_top">80dp</dimen>
 </resources>

@@ -9,20 +9,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".splashscreen.SplashScreenActivity">
+        <activity android:name=".splashscreen.SplashScreenActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".categories.CategoriesActivity"
             android:label="@string/title_activity_categories"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".addquestion.AddQuestionActivity" />
-        <activity android:name=".questions.QuestionsActivity" />
-        <activity android:name=".playquiz.PlayQuizActivity"/>
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".addquestion.AddQuestionActivity"
+            android:label="@string/title_activity_add_question"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".questions.QuestionsActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".playquiz.PlayQuizActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
