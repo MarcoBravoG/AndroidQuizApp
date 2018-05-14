@@ -15,7 +15,6 @@ import pars.androidquizapp.data.Question;
 public class PlayQuizFragment extends Fragment implements PlayQuizContract.View{
 
 
-    private OnFragmentInteractionListener mListener;
 
     public PlayQuizFragment() {
         // Required empty public constructor
@@ -38,7 +37,6 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View{
     @Override
     public void onResume() {
         super.onResume();
-        mListener = null;
     }
 
     @Override
@@ -51,9 +49,4 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View{
 
     }
 
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }
