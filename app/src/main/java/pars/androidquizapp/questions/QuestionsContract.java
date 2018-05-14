@@ -2,20 +2,23 @@ package pars.androidquizapp.questions;
 
 import java.util.List;
 
+import pars.androidquizapp.BasePresenter;
+import pars.androidquizapp.BaseView;
 import pars.androidquizapp.data.Question;
 
-/**
- * Created by Princess on 07/05/2018.
- */
 
 public interface QuestionsContract {
 
-    interface View {
+    interface View extends BaseView<QuestionsContract.Presenter>{
 
-        void showQuestions(List<Question> questions);
+        void showAllQuestions(List<Question> questions);
+
+        void showEmptyMessage();
     }
 
-    interface UserActionsListener {
+    interface Presenter extends BasePresenter {
+
+        void fetchQuestions(String category);
 
         void updateQuestion();
 

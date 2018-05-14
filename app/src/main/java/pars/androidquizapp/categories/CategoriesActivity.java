@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import pars.androidquizapp.R;
 import pars.androidquizapp.addquestion.AddQuestionActivity;
@@ -49,9 +48,14 @@ public class CategoriesActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if(id == R.id.action_add_question){
-            //Toast.makeText(this, "Selected", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(CategoriesActivity.this, AddQuestionActivity.class));
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

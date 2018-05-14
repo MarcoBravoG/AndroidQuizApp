@@ -1,13 +1,11 @@
 package pars.androidquizapp.categories;
 
 
-import android.util.Log;
 
 import java.util.List;
 
 import pars.androidquizapp.data.Category;
 import pars.androidquizapp.data.CategoryDao;
-
 
 
 public class CategoriesPresenter implements CategoriesContract.Presenter {
@@ -41,9 +39,14 @@ public class CategoriesPresenter implements CategoriesContract.Presenter {
     @Override
     public void fetchCategories() {
         List<Category> categoryList =  categoryDao.getAllCategories();
-        Log.e("LIST SIZE", "This is the size: " + categoryList.toString());
         mCategoriesView.showCategories(categoryList);
     }
+
+    @Override
+    public void getQuestionCount() {
+
+    }
+
 
     @Override
     public void playQuiz() {

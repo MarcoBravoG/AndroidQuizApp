@@ -1,5 +1,6 @@
 package pars.androidquizapp.categories;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import pars.androidquizapp.R;
 import pars.androidquizapp.data.Category;
 import pars.androidquizapp.data.MainDatabase;
 import pars.androidquizapp.categories.CategoriesAdapter.OnCategoryClicked;
+import pars.androidquizapp.questions.QuestionsActivity;
 
 
 public class CategoriesFragment extends Fragment implements CategoriesContract.View{
@@ -73,6 +75,7 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         categoriesAdapter = new CategoriesAdapter(getActivity(), categories, mItemListener);
         recyclerView.setAdapter(categoriesAdapter);
+        recyclerView.invalidate();
         return root;
     }
 
@@ -82,7 +85,10 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
     OnCategoryClicked mItemListener = new OnCategoryClicked() {
         @Override
         public void onCategoryClick(Category category) {
-
+            Intent intent = new Intent(getContext(), QuestionsActivity.class);
+            intent.putExtra("category", category.getCategory());
+            startActivity(intent);
+            Toast.makeText(getContext(), category.getCategory() + " is selected", Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -98,7 +104,11 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
                 mPresenter.addNewCategory();
             }
         });
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
         if(categories == null){
             showEmptyMessage();
         }
@@ -106,14 +116,9 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
+        mPresenter.fetchCategories();
     }
 
 
@@ -122,11 +127,17 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
         emptyTextView.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void showQuestionCount() {
+
+    }
+
 
     @Override
     public void showCategories(List<Category> category) {
         emptyTextView.setVisibility(View.GONE);
         categoriesAdapter.setValues(category);
+        categoriesAdapter.randomColor();
     }
 
     @Override

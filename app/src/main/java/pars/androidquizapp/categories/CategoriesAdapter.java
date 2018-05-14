@@ -1,6 +1,7 @@
 package pars.androidquizapp.categories;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,12 +25,20 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     private Context context;
     private List<Category> categoryList;
     private OnCategoryClicked onCategoryClicked;
+    private int color;
 
 
     public CategoriesAdapter(Context context, List<Category> categoryList, OnCategoryClicked onCategoryClicked){
         this.context = context;
         this.categoryList = categoryList;
         this.onCategoryClicked = onCategoryClicked;
+        randomColor();
+    }
+
+    public void randomColor(){
+        Random random = new Random();
+        color = Color.argb(255, random.nextInt(256),
+                random.nextInt(256), random.nextInt(256));
     }
 
 
@@ -45,6 +55,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     public void onBindViewHolder(CategoryViewHolder holder, int position) {
         Category result = categoryList.get(position);
         holder.categoryTitle.setText(result.getCategory());
+        holder.relativeLayout.setBackgroundColor(color);
     }
 
     @Override
@@ -58,8 +69,10 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
     public void setValues(List<Category> values){
         categoryList = values;
+        //notifyItemInserted(getItem(categoryList.get()));
         notifyDataSetChanged();
     }
+
 
     public class CategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
@@ -84,6 +97,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
             Category category = getItem(position);
             onCategoryClicked.onCategoryClick(category);
         }
+
+
     }
 
     public interface OnCategoryClicked {

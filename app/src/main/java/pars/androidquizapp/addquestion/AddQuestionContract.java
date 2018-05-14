@@ -1,15 +1,23 @@
 package pars.androidquizapp.addquestion;
 
-/**
- * Created by Princess on 07/05/2018.
- */
+
+import java.util.List;
+
+import pars.androidquizapp.BasePresenter;
+import pars.androidquizapp.BaseView;
+import pars.androidquizapp.data.Question;
 
 public interface AddQuestionContract {
 
-    interface UserActionsListener{
+    interface view extends BaseView<AddQuestionContract.Presenter>{
 
-        void addQuestion(int id, String Category, String Question, String optionA,
+    }
+
+    interface Presenter extends BasePresenter{
+
+        void saveQuestion(String Category, String Question, String optionA,
                          String optionB, String optionC,String optionD,
                          String answer);
+
     }
 }

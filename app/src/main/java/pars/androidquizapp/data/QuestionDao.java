@@ -10,9 +10,7 @@ import java.util.List;
 
 import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 
-/**
- * Created by Princess on 25/04/2018.
- */
+
 @Dao
 public interface QuestionDao {
 
@@ -22,7 +20,7 @@ public interface QuestionDao {
     @Query("SELECT * FROM questions_table")
     List<Question> getAllQuestions();
 
-    @Query("SELECT * FROM questions_table WHERE questionCategory LIKE (:questionCategory)")
+    @Query("SELECT * FROM questions_table WHERE questionCategory = :questionCategory")
     List<Question> queryQuestion(String questionCategory);
 
     @Update

@@ -14,9 +14,7 @@ import butterknife.ButterKnife;
 import pars.androidquizapp.R;
 import pars.androidquizapp.data.Question;
 
-/**
- * Created by Princess on 24/04/2018.
- */
+
 
 public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.QuestionViewHolder> {
 
@@ -41,34 +39,41 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
 
     @Override
     public void onBindViewHolder(QuestionsAdapter.QuestionViewHolder holder, int position) {
-       /* Question data = questionList.get(position);
-        holder.questionId.setText(String.valueOf(data.getId())+".");
-        holder.questionCategoryName.setText("Category: "+ data.getQuestionCategory());
-        holder.questionView.setText(data.getQuestion());
-        holder.optionsView.setText("A) "+ data.getOptionA()+
-                " B) "+ data.getOptionB()+
-                " C) "+ data.getOptionC()+
-                " D) "+ data.getOptionD());
-        holder.questionAnswer.setText("Ans: "+ data.getAnswerOoption());
-    */}
+        Question data = questionList.get(position);
+        holder.question.setText(data.getQuestion());
+        holder.questionOptionA.setText("A) " + data.getOptionA());
+        holder.questionOptionB.setText("B) " + data.getOptionB());
+        holder.questionOptionC.setText("C) " + data.getOptionC());
+        holder.questionOptionD.setText("D) " + data.getOptionD());
+
+    }
 
     @Override
     public int getItemCount() {
         return questionList.size();
     }
 
+    Question getItem(int position){
+        return questionList.get(position);
+    }
+
+    void setValues(List<Question> values){
+        questionList = values;
+        notifyDataSetChanged();
+    }
+
     public class QuestionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        /*@BindView(R.id.question_id)
-        TextView questionId;
-        @BindView(R.id.question_category_name)
-        TextView questionCategoryName;
-        @BindView(R.id.question)
-        TextView questionView;
-        @BindView(R.id.options)
-        TextView optionsView;
-        @BindView(R.id.answer)
-        TextView questionAnswer;*/
+        @BindView(R.id.db_question)
+        TextView question;
+        @BindView(R.id.db_optionA)
+        TextView questionOptionA;
+        @BindView(R.id.db_optionB)
+        TextView questionOptionB;
+        @BindView(R.id.db_optionC)
+        TextView questionOptionC;
+        @BindView(R.id.db_optionD)
+        TextView questionOptionD;
 
         public QuestionViewHolder(View itemView) {
             super(itemView);
@@ -78,12 +83,13 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
 
         @Override
         public void onClick(View v) {
-            onQuestionClicked.onClick(getAdapterPosition());
+            int position = getAdapterPosition();
+            Question question = getItem(position);
+            onQuestionClicked.onQuestionClick(question);
         }
     }
 
     public interface OnQuestionClicked {
-        //void onClick(Category data);
-        void onClick(int position);
+        void onQuestionClick(Question question);
     }
 }

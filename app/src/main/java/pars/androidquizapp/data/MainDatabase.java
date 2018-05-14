@@ -15,7 +15,7 @@ public abstract class MainDatabase extends RoomDatabase {
 
     private static MainDatabase categoryDB;
 
-    // synchronized is use to avoid concurrent access in multithred environment
+    // synchronized is use to avoid concurrent access in multi thread environment
     public static /*synchronized*/ MainDatabase getInstance(Context context) {
         if (null == categoryDB) {
             categoryDB = buildDatabaseInstance(context);
