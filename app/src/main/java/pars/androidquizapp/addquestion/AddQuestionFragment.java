@@ -1,6 +1,5 @@
 package pars.androidquizapp.addquestion;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -24,12 +22,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import pars.androidquizapp.R;
 import pars.androidquizapp.categories.CategoriesActivity;
-import pars.androidquizapp.categories.CategoriesContract;
-import pars.androidquizapp.categories.CategoriesPresenter;
 import pars.androidquizapp.data.Category;
 import pars.androidquizapp.data.MainDatabase;
-import pars.androidquizapp.data.Question;
-import pars.androidquizapp.questions.QuestionsAdapter;
 
 
 public class AddQuestionFragment extends Fragment implements
@@ -128,11 +122,9 @@ public class AddQuestionFragment extends Fragment implements
     private void loadSpinnerData(){
         //Get all categories to the spinner
         getElements = database.categoryDao().getAllCategories();
-        Log.e("DATA", getElements.toString());
         for(Category cat : getElements){
             data.add(cat.getCategory());
         }
-        Log.e("DATA", data.toString());
 
         //create adapter for spinner
         ArrayAdapter<String> dataAdapter =
@@ -147,7 +139,6 @@ public class AddQuestionFragment extends Fragment implements
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         spinnerSelected = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), spinnerSelected +" is selected", Toast.LENGTH_SHORT).show();
     }
 
     @Override

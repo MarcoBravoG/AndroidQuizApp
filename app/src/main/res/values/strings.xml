@@ -14,7 +14,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="take_quiz">Take Quiz</string>
+    <string name="take_quiz">Take me in</string>
     <string name="empty_question_view">No Question Found, Let\'s Add Some!</string>
 
 </resources>

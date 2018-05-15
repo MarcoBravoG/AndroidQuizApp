@@ -1,12 +1,8 @@
 package pars.androidquizapp.addquestion;
 
 
-import android.util.Log;
-
-import java.util.List;
-
-import pars.androidquizapp.data.Question;
 import pars.androidquizapp.data.QuestionDao;
+import pars.androidquizapp.data.Question;
 
 
 public class AddQuestionPresenter implements AddQuestionContract.Presenter{

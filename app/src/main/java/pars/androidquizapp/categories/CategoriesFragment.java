@@ -1,6 +1,5 @@
 package pars.androidquizapp.categories;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,8 +68,8 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_categories, container, false);
-
         ButterKnife.bind(this, root);
+
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         categoriesAdapter = new CategoriesAdapter(getActivity(), categories, mItemListener);
         recyclerView.setAdapter(categoriesAdapter);
@@ -88,7 +86,6 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
             Intent intent = new Intent(getContext(), QuestionsActivity.class);
             intent.putExtra("category", category.getCategory());
             startActivity(intent);
-            Toast.makeText(getContext(), category.getCategory() + " is selected", Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -109,9 +106,6 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
     @Override
     public void onStart() {
         super.onStart();
-        if(categories == null){
-            showEmptyMessage();
-        }
         mPresenter.fetchCategories();
     }
 
@@ -127,17 +121,15 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
         emptyTextView.setVisibility(View.VISIBLE);
     }
 
-    @Override
-    public void showQuestionCount() {
-
-    }
-
 
     @Override
     public void showCategories(List<Category> category) {
-        emptyTextView.setVisibility(View.GONE);
-        categoriesAdapter.setValues(category);
-        categoriesAdapter.randomColor();
+        if(category.isEmpty()){
+            showEmptyMessage();
+        } else {
+            emptyTextView.setVisibility(View.GONE);
+            categoriesAdapter.setValues(category);
+        }
     }
 
     @Override

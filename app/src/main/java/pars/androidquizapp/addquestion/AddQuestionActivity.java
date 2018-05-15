@@ -21,6 +21,11 @@ public class AddQuestionActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         // Instantiates the fragment method
         if(null == savedInstanceState){
             initFragment(AddQuestionFragment.newInstance());

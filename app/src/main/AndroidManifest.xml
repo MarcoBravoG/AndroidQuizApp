@@ -25,7 +25,12 @@
 
         <activity android:name=".addquestion.AddQuestionActivity"
             android:label="@string/title_activity_add_question"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".categories.CategoriesActivity" />
+        </activity>
 
         <activity android:name=".questions.QuestionsActivity"
             android:screenOrientation="portrait"

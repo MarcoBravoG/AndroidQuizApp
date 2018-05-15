@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +71,7 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
     }
 
     /**
-     * Listener for clicks on categories in the RecyclerView.
+     * Listener for clicks on questions in the RecyclerView.
      */
     OnQuestionClicked mItemListener = new OnQuestionClicked() {
         @Override
@@ -86,15 +85,12 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
         super.onActivityCreated(savedInstanceState);
 
         category = getActivity().getIntent().getExtras().getString("category");
-        if(questions == null){
-            showEmptyMessage();
-        }
-        mPresenter.fetchQuestions(category);
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        mPresenter.fetchQuestions(category);
     }
 
     @Override
@@ -105,9 +101,12 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
 
     @Override
     public void showAllQuestions(List<Question> questions) {
-        emptyTextView.setVisibility(View.GONE);
-        questionsAdapter.setValues(questions);
-
+        if(questions.isEmpty()){
+            showEmptyMessage();
+        } else {
+            emptyTextView.setVisibility(View.GONE);
+            questionsAdapter.setValues(questions);
+        }
     }
 
     @Override

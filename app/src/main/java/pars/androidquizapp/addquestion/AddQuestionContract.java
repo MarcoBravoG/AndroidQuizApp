@@ -1,11 +1,9 @@
 package pars.androidquizapp.addquestion;
 
 
-import java.util.List;
-
 import pars.androidquizapp.BasePresenter;
 import pars.androidquizapp.BaseView;
-import pars.androidquizapp.data.Question;
+
 
 public interface AddQuestionContract {
 

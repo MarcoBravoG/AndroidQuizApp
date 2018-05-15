@@ -18,6 +18,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import pars.androidquizapp.R;
 import pars.androidquizapp.data.Category;
+import pars.androidquizapp.data.Question;
+import pars.androidquizapp.questions.QuestionsContract;
 
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoryViewHolder> {
@@ -32,7 +34,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         this.context = context;
         this.categoryList = categoryList;
         this.onCategoryClicked = onCategoryClicked;
-        randomColor();
     }
 
     public void randomColor(){
@@ -53,6 +54,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
     @Override
     public void onBindViewHolder(CategoryViewHolder holder, int position) {
+        randomColor();
         Category result = categoryList.get(position);
         holder.categoryTitle.setText(result.getCategory());
         holder.relativeLayout.setBackgroundColor(color);
@@ -69,21 +71,23 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
     public void setValues(List<Category> values){
         categoryList = values;
-        //notifyItemInserted(getItem(categoryList.get()));
         notifyDataSetChanged();
     }
 
 
+    /**
+    * ViewHolder class
+     **/
     public class CategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         @BindView(R.id.relative)
         RelativeLayout relativeLayout;
         @BindView(R.id.category_title)
         TextView categoryTitle;
-        @BindView(R.id.question_count)
+        /*@BindView(R.id.question_count)
         TextView questionCount;
         @BindView(R.id.play_button)
-        Button playButton;
+        Button playButton;*/
 
         public CategoryViewHolder(View itemView) {
             super(itemView);
