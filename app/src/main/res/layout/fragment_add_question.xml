@@ -1,0 +1,71 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/frame_layout_margin_top">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="56dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+
+        <Spinner
+            android:id="@+id/question_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Select Category" />
+
+        <EditText
+            android:id="@+id/question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Question"/>
+
+        <EditText
+            android:id="@+id/opta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Option A"/>
+
+        <EditText
+            android:id="@+id/optb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Option B"/>
+
+        <EditText
+            android:id="@+id/optc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Option C"/>
+
+        <EditText
+            android:id="@+id/optd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Option D"/>
+
+        <EditText
+            android:id="@+id/ans"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Answer Option (A-B-C-D)"/>
+
+        <Button
+            android:id="@+id/add_question"
+            android:layout_width="163dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:layout_gravity="center_horizontal"
+            android:padding="12dp"
+            android:text="Add"
+            android:textColor="@color/white"
+            android:background="@color/colorAccent"/>
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -9,24 +9,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity
-            android:name=".HomeActivity"
-            android:theme="@style/AppTheme">
+        <activity android:name=".splashscreen.SplashScreenActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CategoryActivity" />
-        <activity android:name=".category.view.AddCategoryActivity" />
-        <!--<activity android:name=".CategoriesActivity" />-->
-        <activity android:name=".question.view.AddQuestionActivity" />
-        <!--<activity android:name=".QuestionsActivity" />-->
-        <activity android:name=".MainGameActivity" />
-        <activity android:name=".QuizResultActivity" />
 
+        <activity
+            android:name=".categories.CategoriesActivity"
+            android:label="@string/title_activity_categories"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".addquestion.AddQuestionActivity"
+            android:label="@string/title_activity_add_question"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".categories.CategoriesActivity" />
+        </activity>
+
+        <activity android:name=".questions.QuestionsActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"
+            android:label="@string/title_activity_question">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".categories.CategoriesActivity" />
+        </activity>
+
+        <activity android:name=".playquiz.PlayQuizActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
