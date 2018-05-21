@@ -6,6 +6,7 @@
     <string name="title_activity_add_question">Add Question</string>
     <string name="title_activity_categories">Categories</string>
     <string name="title_activity_question">Questions</string>
+    <string name="title_activity_quiz">Quiz</string>
     <string name="play_quiz">Play Quiz</string>
     <string name="add_question">Add Question</string>
     <string name="category_title">Football</string>

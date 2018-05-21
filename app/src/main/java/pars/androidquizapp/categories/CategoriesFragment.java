@@ -21,10 +21,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import pars.androidquizapp.R;
 import pars.androidquizapp.data.Category;
 import pars.androidquizapp.data.MainDatabase;
 import pars.androidquizapp.categories.CategoriesAdapter.OnCategoryClicked;
+import pars.androidquizapp.playquiz.PlayQuizActivity;
 import pars.androidquizapp.questions.QuestionsActivity;
 
 
@@ -74,6 +76,7 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
         categoriesAdapter = new CategoriesAdapter(getActivity(), categories, mItemListener);
         recyclerView.setAdapter(categoriesAdapter);
         recyclerView.invalidate();
+
         return root;
     }
 
@@ -87,7 +90,15 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
             intent.putExtra("category", category.getCategory());
             startActivity(intent);
         }
+
+        @Override
+        public void onPlayButtonClicked(Category category) {
+            Intent intent = new Intent(getContext(), PlayQuizActivity.class);
+            intent.putExtra("category", category.getCategory());
+            startActivity(intent);
+        }
     };
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -97,10 +108,10 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 mPresenter.addNewCategory();
             }
         });
+
     }
 
     @Override
@@ -119,6 +130,13 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
     @Override
     public void showEmptyMessage() {
         emptyTextView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showQuizQuestions() {
+        Intent intent = new Intent(getContext(), QuestionsActivity.class);
+        //intent.putExtra("category", database.categoryDao().getCategory());
+        startActivity(intent);
     }
 
 

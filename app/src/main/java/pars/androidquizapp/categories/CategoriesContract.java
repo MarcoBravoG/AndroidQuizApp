@@ -16,6 +16,9 @@ public interface CategoriesContract {
         void showAddCategory();
 
         void showEmptyMessage();
+
+        void showQuizQuestions();
+
     }
 
     interface Presenter extends BasePresenter {

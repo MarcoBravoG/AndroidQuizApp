@@ -58,6 +58,10 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         Category result = categoryList.get(position);
         holder.categoryTitle.setText(result.getCategory());
         holder.relativeLayout.setBackgroundColor(color);
+
+        holder.playButton.setOnClickListener(v -> {
+            onCategoryClicked.onPlayButtonClicked(result);
+        });
     }
 
     @Override
@@ -85,13 +89,14 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         @BindView(R.id.category_title)
         TextView categoryTitle;
         /*@BindView(R.id.question_count)
-        TextView questionCount;
+        TextView questionCount;*/
         @BindView(R.id.play_button)
-        Button playButton;*/
+        Button playButton;
 
         public CategoryViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
             itemView.setOnClickListener(this);
         }
 
@@ -100,6 +105,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
             int position = getAdapterPosition();
             Category category = getItem(position);
             onCategoryClicked.onCategoryClick(category);
+
         }
 
 
@@ -107,6 +113,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
     public interface OnCategoryClicked {
         void onCategoryClick(Category category);
+
+        void onPlayButtonClicked(Category category);
     }
 
 }
