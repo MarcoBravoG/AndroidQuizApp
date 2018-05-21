@@ -6,9 +6,6 @@ import pars.androidquizapp.BasePresenter;
 import pars.androidquizapp.BaseView;
 import pars.androidquizapp.data.Question;
 
-/**
- * Created by Princess on 07/05/2018.
- */
 
 public interface PlayQuizContract {
 
