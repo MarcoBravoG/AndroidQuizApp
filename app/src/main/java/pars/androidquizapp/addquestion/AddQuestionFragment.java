@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -26,19 +27,17 @@ import pars.androidquizapp.data.Category;
 import pars.androidquizapp.data.MainDatabase;
 
 
-public class AddQuestionFragment extends Fragment implements
-        AddQuestionContract.view, AdapterView.OnItemSelectedListener {
+public class AddQuestionFragment extends Fragment implements AddQuestionContract.view {
 
 
     private AddQuestionContract.Presenter mPresenter;
     private MainDatabase database;
 
     public static List<String> data = new ArrayList<String>();
-    List<Category> getElements;
-    String spinnerSelected;
+    String category;
 
-    @BindView(R.id.question_category)
-    Spinner spinner;
+    @BindView(R.id.category_type)
+    TextView categoryType;
     @BindView(R.id.question)
     EditText question;
     @BindView(R.id.opta)
@@ -90,11 +89,10 @@ public class AddQuestionFragment extends Fragment implements
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        spinner.setOnItemSelectedListener(this);
 
-        loadSpinnerData();
+        category = getActivity().getIntent().getExtras().getString("category");
 
-
+        categoryType.setText("Category: " + category);
         btnQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,7 +103,7 @@ public class AddQuestionFragment extends Fragment implements
                 String optionD = optD.getText().toString();
                 String answer = ans.getText().toString().toLowerCase();
 
-                mPresenter.saveQuestion(spinnerSelected, newQuestion, optionA, optionB,
+                mPresenter.saveQuestion(category, newQuestion, optionA, optionB,
                         optionC, optionD, answer);
                 startActivity(new Intent(getActivity(), CategoriesActivity.class));
             }
@@ -119,30 +117,4 @@ public class AddQuestionFragment extends Fragment implements
         super.onResume();
     }
 
-    private void loadSpinnerData(){
-        //Get all categories to the spinner
-        getElements = database.categoryDao().getAllCategories();
-        for(Category cat : getElements){
-            data.add(cat.getCategory());
-        }
-
-        //create adapter for spinner
-        ArrayAdapter<String> dataAdapter =
-                new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,
-                        data);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        //attach the data adapter to spinner
-        spinner.setAdapter(dataAdapter);
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        spinnerSelected = parent.getItemAtPosition(position).toString();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 }

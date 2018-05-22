@@ -14,11 +14,15 @@ public interface QuestionsContract {
         void showAllQuestions(List<Question> questions);
 
         void showEmptyMessage();
+
+        void showAddQuestion();
     }
 
     interface Presenter extends BasePresenter {
 
         void fetchQuestions(String category);
+
+        void addQuestion();
 
         void updateQuestion();
 

@@ -12,6 +12,7 @@
     <string name="category_title">Football</string>
     <string name="question_count">10Q</string>
     <string name="empty_view">No Category Found, Let\'s Add Some!</string>
+    <string name="category_type">Category: </string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

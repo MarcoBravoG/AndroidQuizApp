@@ -25,6 +25,11 @@ public class QuestionsPresenter implements QuestionsContract.Presenter {
     }
 
     @Override
+    public void addQuestion() {
+        mView.showAddQuestion();
+    }
+
+    @Override
     public void updateQuestion() {
 
     }

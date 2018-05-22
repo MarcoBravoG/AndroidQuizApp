@@ -4,11 +4,8 @@ import java.util.List;
 
 import pars.androidquizapp.data.Question;
 import pars.androidquizapp.data.QuestionDao;
-import pars.androidquizapp.questions.QuestionsContract;
 
-/**
- * Created by Princess on 07/05/2018.
- */
+
 
 public class PlayQuizPresenter implements PlayQuizContract.Presenter {
 

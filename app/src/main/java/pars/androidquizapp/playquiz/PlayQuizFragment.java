@@ -1,6 +1,5 @@
 package pars.androidquizapp.playquiz;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -19,9 +19,6 @@ import butterknife.ButterKnife;
 import pars.androidquizapp.R;
 import pars.androidquizapp.data.MainDatabase;
 import pars.androidquizapp.data.Question;
-import pars.androidquizapp.questions.QuestionsAdapter;
-import pars.androidquizapp.questions.QuestionsContract;
-import pars.androidquizapp.questions.QuestionsPresenter;
 
 public class PlayQuizFragment extends Fragment implements PlayQuizContract.View{
 
@@ -35,6 +32,8 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View{
     TextView emptyTextView;
     @BindView(R.id.quiz_recycler_view)
     RecyclerView recyclerView;
+    @BindView(R.id.submit_button)
+    Button submitButton;
 
     public PlayQuizFragment() {
         // Required empty public constructor
@@ -91,9 +90,10 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View{
     @Override
     public void showQuestions(List<Question> questions) {
         if(questions.isEmpty()){
-            showEmptyMessage();
+            //showEmptyMessage();
         } else {
-            emptyTextView.setVisibility(View.GONE);
+            //emptyTextView.setVisibility(View.GONE);
+            //submitButton.setVisibility(View.VISIBLE);
             playQuizAdapter.setValues(questions);
         }
     }
@@ -106,6 +106,7 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View{
     @Override
     public void showEmptyMessage() {
         emptyTextView.setVisibility(View.VISIBLE);
+        submitButton.setVisibility(View.GONE);
     }
 
 }

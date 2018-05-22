@@ -23,8 +23,7 @@
         <RadioButton
             android:id="@+id/radio_button_a"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true" />
+            android:layout_height="wrap_content" />
 
         <RadioButton
             android:id="@+id/radio_button_b"
@@ -42,7 +41,10 @@
             android:layout_height="wrap_content" />
 
     </RadioGroup>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/button_color" />
 
 </LinearLayout>
 

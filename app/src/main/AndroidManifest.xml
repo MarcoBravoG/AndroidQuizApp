@@ -43,7 +43,11 @@
 
         <activity android:name=".playquiz.PlayQuizActivity"
             android:label="@string/title_activity_quiz"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".categories.CategoriesActivity" />
+        </activity>
     </application>
 
 </manifest>

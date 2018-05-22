@@ -1,8 +1,10 @@
 package pars.androidquizapp.questions;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +19,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pars.androidquizapp.R;
+import pars.androidquizapp.addquestion.AddQuestionActivity;
 import pars.androidquizapp.questions.QuestionsAdapter.OnQuestionClicked;
 import pars.androidquizapp.data.MainDatabase;
 import pars.androidquizapp.data.Question;
@@ -85,6 +88,14 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
         super.onActivityCreated(savedInstanceState);
 
         category = getActivity().getIntent().getExtras().getString("category");
+
+        FloatingActionButton fab = getActivity().findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.addQuestion();
+            }
+        });
     }
 
     @Override
@@ -112,6 +123,13 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
     @Override
     public void showEmptyMessage() {
         emptyTextView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showAddQuestion() {
+        Intent intent = new Intent(getContext(), AddQuestionActivity.class);
+        intent.putExtra("category", category);
+        startActivity(intent);
     }
 
 }

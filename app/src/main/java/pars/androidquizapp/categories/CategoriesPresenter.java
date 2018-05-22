@@ -41,12 +41,6 @@ public class CategoriesPresenter implements CategoriesContract.Presenter {
     }
 
     @Override
-    public void playQuiz() {
-        mCategoriesView.showQuizQuestions();
-    }
-
-
-    @Override
     public void updateCategory() {
 
     }

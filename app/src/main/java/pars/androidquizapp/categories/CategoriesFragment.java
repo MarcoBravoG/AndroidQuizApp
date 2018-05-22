@@ -21,7 +21,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import pars.androidquizapp.R;
 import pars.androidquizapp.data.Category;
 import pars.androidquizapp.data.MainDatabase;
@@ -130,13 +129,6 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
     @Override
     public void showEmptyMessage() {
         emptyTextView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void showQuizQuestions() {
-        Intent intent = new Intent(getContext(), QuestionsActivity.class);
-        //intent.putExtra("category", database.categoryDao().getCategory());
-        startActivity(intent);
     }
 
 
