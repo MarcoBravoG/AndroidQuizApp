@@ -22,8 +22,6 @@ public interface PlayQuizContract {
 
         void fetchQuestions(String category);
 
-        void clickCorrectButton();
-
         void backToMenu();
 
         void playAgain();

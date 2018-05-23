@@ -7,9 +7,7 @@ import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 
-/**
- * Created by Princess on 24/04/2018.
- */
+
 @Entity(tableName = "questions_table")
 public class Question implements Serializable {
 

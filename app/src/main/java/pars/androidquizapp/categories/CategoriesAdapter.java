@@ -82,7 +82,9 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     /**
     * ViewHolder class
      **/
-    public class CategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class CategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        Category category;
 
         @BindView(R.id.relative)
         RelativeLayout relativeLayout;
@@ -103,9 +105,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
-            Category category = getItem(position);
+            category = getItem(position);
             onCategoryClicked.onCategoryClick(category);
-
         }
 
 

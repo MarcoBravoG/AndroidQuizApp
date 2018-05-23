@@ -26,11 +26,6 @@ public class PlayQuizPresenter implements PlayQuizContract.Presenter {
     }
 
     @Override
-    public void clickCorrectButton() {
-
-    }
-
-    @Override
     public void backToMenu() {
 
     }

@@ -3,7 +3,7 @@
     android:id="@+id/play_quiz_questions"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="16dp"
     android:orientation="vertical">
 
@@ -44,7 +44,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/button_color" />
+        android:background="@color/button_color"
+        android:layout_marginTop="6dp"/>
 
 </LinearLayout>
 
