@@ -26,6 +26,11 @@ public class PlayQuizPresenter implements PlayQuizContract.Presenter {
     }
 
     @Override
+    public void calculateScore() {
+        mView.showScore();
+    }
+
+    @Override
     public void backToMenu() {
 
     }

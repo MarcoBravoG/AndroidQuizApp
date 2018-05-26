@@ -1,23 +1,30 @@
 package pars.androidquizapp.playquiz;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 import pars.androidquizapp.R;
+import pars.androidquizapp.categories.CategoriesActivity;
 import pars.androidquizapp.data.MainDatabase;
 import pars.androidquizapp.data.Question;
 
@@ -27,7 +34,24 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View{
     private MainDatabase database;
     private List<Question> questions = new ArrayList<>();
     private PlayQuizAdapter playQuizAdapter;
+    private LinearLayoutManager linearLayoutManager;
     private String category;
+    private AlertDialog alertDialog = null;
+    private RecyclerView.OnScrollListener scrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+        }
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            if (dy > 0 && linearLayoutManager.findLastVisibleItemPosition() == playQuizAdapter.getItemCount() - 1){
+                submitButton.setVisibility(View.VISIBLE);
+            } else {
+                submitButton.setVisibility(View.GONE);
+            }
+        }
+    };
 
     @BindView(R.id.tv_empty)
     TextView emptyTextView;
@@ -35,6 +59,7 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View{
     RecyclerView recyclerView;
     @BindView(R.id.submit_button)
     Button submitButton;
+
 
     public PlayQuizFragment() {
         // Required empty public constructor
@@ -63,9 +88,14 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View{
         View root = inflater.inflate(R.layout.fragment_play_quiz, container, false);
         ButterKnife.bind(this, root);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        RadioGroup radioGroup = (RadioGroup) root.findViewById(R.id.radio_group);
+
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(linearLayoutManager);
+
         playQuizAdapter = new PlayQuizAdapter(getActivity(), questions);
         recyclerView.setAdapter(playQuizAdapter);
+        recyclerView.addOnScrollListener(scrollListener);
         recyclerView.invalidate();
 
         return root;
@@ -76,6 +106,18 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View{
         super.onActivityCreated(savedInstanceState);
 
         category = getActivity().getIntent().getExtras().getString("category");
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(playQuizAdapter.getBlankOption() < playQuizAdapter.getItemCount()){
+                    Toast.makeText(getContext(), "You cannot leave any blank question", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    mPresenter.calculateScore();
+                }
+            }
+        });
     }
 
     @Override
@@ -103,6 +145,37 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View{
     @Override
     public void showScore() {
 
+        //Create an alert dialog builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        //Set title value
+        builder.setPositiveButton("Play Again", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        alertDialog.dismiss();
+                        //startActivity(new Intent(getContext(), PlayQuizActivity.class));
+                    }
+                })
+                .setNeutralButton("Exit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(getContext(), CategoriesActivity.class));
+                    }
+                });
+
+        //Get custom view
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.score_dialog, null);
+        builder.setView(dialogView);
+
+        final TextView correctView = dialogView.findViewById(R.id.correct);
+        final TextView incorrectView = dialogView.findViewById(R.id.incorrect);
+
+        correctView.setText(String.format(Locale.ENGLISH, "%s: %d", "Correct", playQuizAdapter.getCorrectScore()));
+        incorrectView.setText(String.format(Locale.ENGLISH, "%s: %d", "Incorrect", playQuizAdapter.getIncorrectScore()));
+
+        alertDialog = builder.create();
+        alertDialog.show();
     }
 
     @Override

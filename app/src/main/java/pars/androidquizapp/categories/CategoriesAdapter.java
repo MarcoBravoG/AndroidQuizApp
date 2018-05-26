@@ -90,8 +90,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         RelativeLayout relativeLayout;
         @BindView(R.id.category_title)
         TextView categoryTitle;
-        /*@BindView(R.id.question_count)
-        TextView questionCount;*/
         @BindView(R.id.play_button)
         Button playButton;
 

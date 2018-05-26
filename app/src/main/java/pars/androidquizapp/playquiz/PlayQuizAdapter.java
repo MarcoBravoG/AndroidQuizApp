@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -21,6 +23,12 @@ public class PlayQuizAdapter extends RecyclerView.Adapter<PlayQuizAdapter.PlayQu
 
     private Context context;
     private List<Question> questionList;
+    public RadioButton radioButton;
+
+    private int firstCorrectScore = 0;
+    private int incorrectScore = 0;
+    private int secondCorrectScore = 0;
+
 
     public PlayQuizAdapter(Context context, List<Question> questionList) {
         this.context = context;
@@ -46,11 +54,35 @@ public class PlayQuizAdapter extends RecyclerView.Adapter<PlayQuizAdapter.PlayQu
         holder.radioButtonC.setText(data.getOptionC());
         holder.radioButtonD.setText(data.getOptionD());
 
+        holder.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                radioButton = (RadioButton)group.findViewById(checkedId);
+                String radioValue = radioButton.getText().toString().toLowerCase();
+
+                if(radioValue.equals(data.getAnswerOoption())){
+                    firstCorrectScore += 1;
+                } else if(!radioValue.equals(data.getAnswerOoption())){
+                    secondCorrectScore += 1;
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return questionList.size();
+    }
+
+    public int getCorrectScore(){
+        return firstCorrectScore;
+    }
+    public int getIncorrectScore(){
+        incorrectScore = questionList.size() - firstCorrectScore;
+        return incorrectScore;
+    }
+    public int getBlankOption(){
+        return firstCorrectScore + incorrectScore;
     }
 
     void setValues(List<Question> values){
@@ -72,9 +104,17 @@ public class PlayQuizAdapter extends RecyclerView.Adapter<PlayQuizAdapter.PlayQu
         @BindView(R.id.radio_button_d)
         RadioButton radioButtonD;
 
+        public RadioGroup radioGroup;
+
         public PlayQuizViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            radioGroup = itemView.findViewById(R.id.radio_group);
         }
+        public void clearRadioButton(){
+            radioGroup.clearCheck();
+        }
+
     }
+
 }
