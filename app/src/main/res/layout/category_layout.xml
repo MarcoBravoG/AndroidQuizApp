@@ -35,16 +35,6 @@
 
         </RelativeLayout>
 
-        <!--<TextView
-            android:id="@+id/question_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/question_count"
-            android:textSize="@dimen/play_quiz_text_size"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="@dimen/activity_vertical_margin"
-            android:layout_marginBottom="@dimen/card_view_content_bottom_margin"/>-->
-
         <Button
             android:id="@+id/play_button"
             android:layout_width="86dp"
