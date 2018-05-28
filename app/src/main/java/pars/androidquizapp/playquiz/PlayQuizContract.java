@@ -24,9 +24,5 @@ public interface PlayQuizContract {
 
         void calculateScore();
 
-        void backToMenu();
-
-        void playAgain();
-
     }
 }

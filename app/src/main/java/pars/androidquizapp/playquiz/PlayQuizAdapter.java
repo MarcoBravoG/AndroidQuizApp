@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -24,15 +24,19 @@ public class PlayQuizAdapter extends RecyclerView.Adapter<PlayQuizAdapter.PlayQu
     private Context context;
     private List<Question> questionList;
     public RadioButton radioButton;
+    ArrayList<Integer> answersQuestions = new ArrayList<>();
 
-    private int firstCorrectScore = 0;
+    List<AnswerModel> selectedIds = new ArrayList<>();
+
+    private int correctScore = 0;
     private int incorrectScore = 0;
-    private int secondCorrectScore = 0;
+    private int emptyScore = 0;
 
 
     public PlayQuizAdapter(Context context, List<Question> questionList) {
         this.context = context;
         this.questionList = questionList;
+
     }
 
     @NonNull
@@ -57,14 +61,30 @@ public class PlayQuizAdapter extends RecyclerView.Adapter<PlayQuizAdapter.PlayQu
         holder.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                radioButton = (RadioButton)group.findViewById(checkedId);
+                radioButton = group.findViewById(checkedId);
                 String radioValue = radioButton.getText().toString().toLowerCase();
 
-                if(radioValue.equals(data.getAnswerOoption())){
-                    firstCorrectScore += 1;
-                } else if(!radioValue.equals(data.getAnswerOoption())){
-                    secondCorrectScore += 1;
+                /* This sets each default value in the array e.g [0,0,0,0]
+                to 1 when a radiobutton is clicked
+                */
+                answersQuestions.set(position, 1);
+
+                if(selectedIds.get(position) != null && selectedIds.get(position).id == group.getId()){
+                    if (radioValue.equals(data.getAnswerOoption())) {
+                        //Do nothing
+                        selectedIds.get(position).isCorrect = true;
+                    } else if (!radioValue.equals(data.getAnswerOoption())) {
+                        emptyScore += 1;
+                    }
                 }
+
+                //This compares the answer from radiobutton with the answer in the database
+                if (radioValue.equals(data.getAnswerOoption())) {
+                    correctScore += 1;
+                } else if (!radioValue.equals(data.getAnswerOoption())) {
+                    emptyScore += 1;
+                }
+
             }
         });
     }
@@ -74,19 +94,27 @@ public class PlayQuizAdapter extends RecyclerView.Adapter<PlayQuizAdapter.PlayQu
         return questionList.size();
     }
 
-    public int getCorrectScore(){
-        return firstCorrectScore;
-    }
-    public int getIncorrectScore(){
-        incorrectScore = questionList.size() - firstCorrectScore;
-        return incorrectScore;
-    }
-    public int getBlankOption(){
-        return firstCorrectScore + incorrectScore;
+    public int getCorrectScore() {
+        return correctScore;
     }
 
-    void setValues(List<Question> values){
+    public int getIncorrectScore() {
+        incorrectScore = questionList.size() - correctScore;
+        return incorrectScore;
+    }
+
+    void setValues(List<Question> values) {
         questionList = values;
+
+        /**
+         * This gets the questions list size
+         * and generates a default array of integer
+         */
+
+        int[] defaultValues = new int[questionList.size()];
+        for (int value : defaultValues) {
+            answersQuestions.add(value);
+        }
         notifyDataSetChanged();
     }
 
@@ -111,10 +139,6 @@ public class PlayQuizAdapter extends RecyclerView.Adapter<PlayQuizAdapter.PlayQu
             ButterKnife.bind(this, itemView);
             radioGroup = itemView.findViewById(R.id.radio_group);
         }
-        public void clearRadioButton(){
-            radioGroup.clearCheck();
-        }
-
     }
 
 }

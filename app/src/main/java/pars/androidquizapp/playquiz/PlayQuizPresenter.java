@@ -31,16 +31,6 @@ public class PlayQuizPresenter implements PlayQuizContract.Presenter {
     }
 
     @Override
-    public void backToMenu() {
-
-    }
-
-    @Override
-    public void playAgain() {
-
-    }
-
-    @Override
     public void start() {
 
     }
