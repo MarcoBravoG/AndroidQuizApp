@@ -69,20 +69,32 @@ public class PlayQuizAdapter extends RecyclerView.Adapter<PlayQuizAdapter.PlayQu
                 */
                 answersQuestions.set(position, 1);
 
-                if(selectedIds.get(position) != null && selectedIds.get(position).id == group.getId()){
-                    if (radioValue.equals(data.getAnswerOoption())) {
-                        //Do nothing
-                        selectedIds.get(position).isCorrect = true;
-                    } else if (!radioValue.equals(data.getAnswerOoption())) {
-                        emptyScore += 1;
-                    }
-                }
-
                 //This compares the answer from radiobutton with the answer in the database
                 if (radioValue.equals(data.getAnswerOoption())) {
-                    correctScore += 1;
-                } else if (!radioValue.equals(data.getAnswerOoption())) {
-                    emptyScore += 1;
+                    if (selectedIds.get(position) != null){
+                        if (!selectedIds.get(position).isCorrect){
+                            correctScore += 1;
+                            selectedIds.get(position).isCorrect = true;
+                        }
+                    } else {
+                        AnswerModel model = new AnswerModel();
+                        model.isCorrect = true;
+                        model.id = group.getId();
+                        selectedIds.set(position, model);
+                        correctScore += 1;
+                    }
+                } else {
+                    if (selectedIds.get(position) != null){
+                        if (selectedIds.get(position).isCorrect){
+                            correctScore -= 1;
+                            selectedIds.get(position).isCorrect = false;
+                        }
+                    } else {
+                        AnswerModel model = new AnswerModel();
+                        model.isCorrect = false;
+                        model.id = group.getId();
+                        selectedIds.set(position, model);
+                    }
                 }
 
             }
@@ -114,6 +126,13 @@ public class PlayQuizAdapter extends RecyclerView.Adapter<PlayQuizAdapter.PlayQu
         int[] defaultValues = new int[questionList.size()];
         for (int value : defaultValues) {
             answersQuestions.add(value);
+        }
+
+        /**
+         * This generates a default array of AnswerModel with size() == questionList.size()
+         */
+        for(int i = 0; i < questionList.size(); i++){
+            selectedIds.add(null);
         }
         notifyDataSetChanged();
     }
