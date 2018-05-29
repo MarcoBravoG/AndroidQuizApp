@@ -16,6 +16,7 @@ public interface CategoriesContract {
         void showAddCategory();
 
         void showEmptyMessage();
+
     }
 
     interface Presenter extends BasePresenter {
@@ -25,8 +26,6 @@ public interface CategoriesContract {
         void saveNewCategory(String category);
 
         void fetchCategories();
-
-        void playQuiz();
 
         void updateCategory();
 

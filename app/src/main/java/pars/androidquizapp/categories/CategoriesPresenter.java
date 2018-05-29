@@ -1,6 +1,5 @@
 package pars.androidquizapp.categories;
 
-
 import java.util.List;
 
 import pars.androidquizapp.data.Category;
@@ -40,13 +39,6 @@ public class CategoriesPresenter implements CategoriesContract.Presenter {
         List<Category> categoryList =  categoryDao.getAllCategories();
         mCategoriesView.showCategories(categoryList);
     }
-
-
-    @Override
-    public void playQuiz() {
-
-    }
-
 
     @Override
     public void updateCategory() {

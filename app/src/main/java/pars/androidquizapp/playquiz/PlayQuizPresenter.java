@@ -1,23 +1,37 @@
 package pars.androidquizapp.playquiz;
 
-/**
- * Created by Princess on 07/05/2018.
- */
+import java.util.List;
 
-public class PlayQuizPresenter implements PlayQuizContract.UserActionsListener {
+import pars.androidquizapp.data.Question;
+import pars.androidquizapp.data.QuestionDao;
+
+
+
+public class PlayQuizPresenter implements PlayQuizContract.Presenter {
+
+    private PlayQuizContract.View mView;
+    private QuestionDao questionDao;
+
+    public PlayQuizPresenter(PlayQuizContract.View mView, QuestionDao questionDao) {
+        this.mView = mView;
+        this.mView.setPresenter(this);
+        this.questionDao = questionDao;
+    }
+
 
     @Override
-    public void clickCorrectButton() {
-
+    public void fetchQuestions(String category) {
+        List<Question> questionList = questionDao.queryQuestion(category);
+        mView.showQuestions(questionList);
     }
 
     @Override
-    public void backToMenu() {
-
+    public void calculateScore() {
+        mView.showScore();
     }
 
     @Override
-    public void playAgain() {
+    public void start() {
 
     }
 }

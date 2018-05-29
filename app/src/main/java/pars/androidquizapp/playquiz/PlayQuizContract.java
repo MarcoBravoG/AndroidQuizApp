@@ -2,28 +2,27 @@ package pars.androidquizapp.playquiz;
 
 import java.util.List;
 
+import pars.androidquizapp.BasePresenter;
+import pars.androidquizapp.BaseView;
 import pars.androidquizapp.data.Question;
 
-/**
- * Created by Princess on 07/05/2018.
- */
 
 public interface PlayQuizContract {
 
-    interface  View {
+    interface View extends BaseView<PlayQuizContract.Presenter> {
 
         void showQuestions(List<Question> questions);
 
         void showScore();
+
+        void showEmptyMessage();
     }
 
-    interface UserActionsListener {
+    interface Presenter extends BasePresenter {
 
-        void clickCorrectButton();
+        void fetchQuestions(String category);
 
-        void backToMenu();
-
-        void playAgain();
+        void calculateScore();
 
     }
 }

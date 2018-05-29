@@ -25,6 +25,7 @@ import pars.androidquizapp.R;
 import pars.androidquizapp.data.Category;
 import pars.androidquizapp.data.MainDatabase;
 import pars.androidquizapp.categories.CategoriesAdapter.OnCategoryClicked;
+import pars.androidquizapp.playquiz.PlayQuizActivity;
 import pars.androidquizapp.questions.QuestionsActivity;
 
 
@@ -74,6 +75,7 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
         categoriesAdapter = new CategoriesAdapter(getActivity(), categories, mItemListener);
         recyclerView.setAdapter(categoriesAdapter);
         recyclerView.invalidate();
+
         return root;
     }
 
@@ -87,7 +89,15 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
             intent.putExtra("category", category.getCategory());
             startActivity(intent);
         }
+
+        @Override
+        public void onPlayButtonClicked(Category category) {
+            Intent intent = new Intent(getContext(), PlayQuizActivity.class);
+            intent.putExtra("category", category.getCategory());
+            startActivity(intent);
+        }
     };
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -97,10 +107,10 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 mPresenter.addNewCategory();
             }
         });
+
     }
 
     @Override

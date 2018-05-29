@@ -1,121 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    android:id="@+id/play_quiz_questions"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/quiz_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:textColor="@color/text_color"
+        android:textSize="18sp" />
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/categories_layout"
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/radio_button_a"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/radio_button_b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/radio_button_c"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/radio_button_d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RadioGroup>
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="50dp"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="8dp">
+        android:layout_height="0.5dp"
+        android:background="@color/button_color"
+        android:layout_marginTop="6dp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/db_question"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/text_color"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/db_optionA"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="24dp"
-                android:textColor="@color/text_color"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/db_optionB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="24dp"
-                android:textColor="@color/text_color"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/db_optionC"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="24dp"
-                android:textColor="@color/text_color"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/db_optionD"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="24dp"
-                android:textColor="@color/text_color"
-                android:textSize="16sp" />
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
-
-
-    <Button
-        android:id="@+id/buttonA"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/buttonC"
-        android:layout_below="@+id/categories_layout"
-        android:layout_marginTop="126dp"
-        android:background="@drawable/option_button"
-        android:foreground="@drawable/button_ripple_effect" />
-
-    <Button
-        android:id="@+id/buttonB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/buttonA"
-        android:layout_alignBottom="@+id/buttonA"
-        android:layout_alignStart="@+id/buttonD"
-        android:background="@drawable/option_button"
-        android:foreground="@drawable/button_ripple_effect" />
-
-    <Button
-        android:id="@+id/buttonC"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/categories_layout"
-        android:layout_below="@+id/buttonA"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/option_button"
-        android:foreground="@drawable/button_ripple_effect" />
-
-    <Button
-        android:id="@+id/buttonD"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/buttonC"
-        android:layout_alignBottom="@+id/buttonC"
-        android:layout_alignEnd="@+id/categories_layout"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/option_button"
-        android:foreground="@drawable/button_ripple_effect" />
-
-</RelativeLayout>
+</LinearLayout>
 
