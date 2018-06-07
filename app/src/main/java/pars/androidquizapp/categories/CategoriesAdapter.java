@@ -27,13 +27,16 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     private Context context;
     private List<Category> categoryList;
     private OnCategoryClicked onCategoryClicked;
+    private OnCategoryOnLongClicked onLongClicked;
     private int color;
 
 
-    public CategoriesAdapter(Context context, List<Category> categoryList, OnCategoryClicked onCategoryClicked){
+    public CategoriesAdapter(Context context, List<Category> categoryList,
+                             OnCategoryClicked onCategoryClicked, OnCategoryOnLongClicked onLongClicked){
         this.context = context;
         this.categoryList = categoryList;
         this.onCategoryClicked = onCategoryClicked;
+        this.onLongClicked = onLongClicked;
     }
 
     public void randomColor(){
@@ -82,7 +85,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     /**
     * ViewHolder class
      **/
-    public class CategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class CategoryViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener, View.OnLongClickListener {
 
         Category category;
 
@@ -98,6 +102,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
             ButterKnife.bind(this, itemView);
 
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
@@ -108,12 +113,24 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         }
 
 
+        @Override
+        public boolean onLongClick(View v) {
+            int position = getAdapterPosition();
+            category = getItem(position);
+            onLongClicked.onCategoryLongClick(category);
+            return false;
+        }
     }
 
     public interface OnCategoryClicked {
         void onCategoryClick(Category category);
 
         void onPlayButtonClicked(Category category);
+    }
+
+    public interface OnCategoryOnLongClicked {
+
+        void onCategoryLongClick(Category category);
     }
 
 }

@@ -23,9 +23,13 @@ public interface QuestionDao {
     @Query("SELECT * FROM questions_table WHERE questionCategory = :questionCategory")
     List<Question> queryQuestion(String questionCategory);
 
+    @Query("SELECT * FROM questions_table WHERE id = :id")
+    Question queryQuestion(long id);
+
     @Update
     void updateQuestion(Question question);
 
     @Delete
     void deleteQuestion(Question question);
+
 }

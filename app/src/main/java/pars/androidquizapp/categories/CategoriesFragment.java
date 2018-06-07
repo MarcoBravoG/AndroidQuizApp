@@ -1,6 +1,7 @@
 package pars.androidquizapp.categories;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,6 +26,7 @@ import pars.androidquizapp.R;
 import pars.androidquizapp.data.Category;
 import pars.androidquizapp.data.MainDatabase;
 import pars.androidquizapp.categories.CategoriesAdapter.OnCategoryClicked;
+import pars.androidquizapp.categories.CategoriesAdapter.OnCategoryOnLongClicked;
 import pars.androidquizapp.playquiz.PlayQuizActivity;
 import pars.androidquizapp.questions.QuestionsActivity;
 
@@ -37,6 +39,7 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
     private List<Category> categories = new ArrayList<>();
     private MainDatabase database;
     private AlertDialog alertDialog = null;
+    private String category;
 
     @BindView(R.id.tv_empty)
     TextView emptyTextView;
@@ -72,7 +75,7 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
         ButterKnife.bind(this, root);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        categoriesAdapter = new CategoriesAdapter(getActivity(), categories, mItemListener);
+        categoriesAdapter = new CategoriesAdapter(getActivity(), categories, mItemListener, mItemLongListener);
         recyclerView.setAdapter(categoriesAdapter);
         recyclerView.invalidate();
 
@@ -80,13 +83,14 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
     }
 
     /**
-     * Listener for clicks on categories in the RecyclerView.
+     * Listener for onClick on a category in the RecyclerView.
      */
     OnCategoryClicked mItemListener = new OnCategoryClicked() {
         @Override
-        public void onCategoryClick(Category category) {
+        public void onCategoryClick(Category onClickCategory) {
+            category = onClickCategory.getCategory();
             Intent intent = new Intent(getContext(), QuestionsActivity.class);
-            intent.putExtra("category", category.getCategory());
+            intent.putExtra("category", category);
             startActivity(intent);
         }
 
@@ -98,6 +102,15 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
         }
     };
 
+    /**
+     * Listener for onLongclick on a category in the RecyclerView.
+     */
+    OnCategoryOnLongClicked mItemLongListener = new OnCategoryOnLongClicked() {
+        @Override
+        public void onCategoryLongClick(Category category) {
+            showItemDialog();
+        }
+    };
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -149,7 +162,7 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
         //Set title value
-        builder.setTitle("Add Categories");
+        builder.setTitle("Add Category");
 
         //Get custom view
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -169,6 +182,38 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
         });
         alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    public void showItemDialog(){
+        //Create an alert dialog builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        //Set title value
+        builder.setTitle("Select Options")
+                .setItems(new String[]{"Update", "Delete"}, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch(which){
+                            case 0:
+                                Toast.makeText(getContext(), "Selected", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 1:
+                                Toast.makeText(getContext(), "Chosen", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                    }
+                }).show();
+
+        alertDialog = builder.create();
+        alertDialog.show();
+
+        //Get custom view
+        /*LayoutInflater inflater = getActivity().getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.add_category_dialog, null);
+        builder.setView(dialogView);
+
+        final EditText editText = dialogView.findViewById(R.id.category_name);
+        final Button addCategory = dialogView.findViewById(R.id.add_category);*/
     }
 
 }
