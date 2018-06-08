@@ -21,6 +21,7 @@ public class Category implements Serializable{
     @ColumnInfo(name = "number_of_question_in_this_category")
     int numberOfQuestionInThisCategory;
 
+
     public Category(String category) {
         this.category = category;
     }

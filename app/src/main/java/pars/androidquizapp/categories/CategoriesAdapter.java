@@ -3,7 +3,9 @@ package pars.androidquizapp.categories;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,6 +81,20 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     public void setValues(List<Category> values){
         categoryList = values;
         notifyDataSetChanged();
+
+        /*if(categoryList != null) {
+            Log.e("THIS IS IT:", categoryList.toString());
+            Log.e("THIS IS IT:", newData.toString());
+
+            PostDiffCallback postDiffCallback = new PostDiffCallback(categoryList, newData);
+            DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(postDiffCallback);
+
+            categoryList.clear();
+            categoryList.addAll(newData);
+            diffResult.dispatchUpdatesTo(this);
+            notifyDataSetChanged();
+            }*/
+
     }
 
 
@@ -132,5 +148,39 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
         void onCategoryLongClick(Category category);
     }
+
+
+    /**
+     * DiffUtil is a class to compare lists in the recyclerview
+     */
+    /*class PostDiffCallback extends DiffUtil.Callback {
+
+        private final List<Category> oldCategories, newCategories;
+
+        public PostDiffCallback(List<Category> oldCategories, List<Category> newCategories) {
+            this.oldCategories = oldCategories;
+            this.newCategories = newCategories;
+        }
+
+        @Override
+        public int getOldListSize() {
+            return oldCategories.size();
+        }
+
+        @Override
+        public int getNewListSize() {
+            return newCategories.size();
+        }
+
+        @Override
+        public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+            return oldCategories.get(oldItemPosition).getId() == newCategories.get(newItemPosition).getId();
+        }
+
+        @Override
+        public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+            return oldCategories.get(oldItemPosition).equals(newCategories.get(newItemPosition));
+        }
+    */
 
 }

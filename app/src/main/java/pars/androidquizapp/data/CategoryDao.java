@@ -20,8 +20,17 @@ public interface CategoryDao {
     @Query("SELECT * FROM categories_table")
     List<Category> getAllCategories();
 
+    /*@Query("SELECT * FROM categories_table WHERE id = :id")
+    Category updateCategory(long id);*/
+
+    //Get all the items in categories_table
+    //Gets the Category with id == id..
+    //Modifies the fields you've specified.
+    @Query("UPDATE categories_table SET category = :category WHERE id = :id")
+    void updateCategory(long id, String category);
+
     @Update
-    void updateCategory(Category category);
+    int updateCategory(Category category);
 
     @Delete
     void deleteCategory(Category category);

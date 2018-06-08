@@ -17,6 +17,7 @@ public interface CategoriesContract {
 
         void showEmptyMessage();
 
+        void showCategoryToUpdate(Category category);
     }
 
     interface Presenter extends BasePresenter {
@@ -27,7 +28,11 @@ public interface CategoriesContract {
 
         void fetchCategories();
 
-        void updateCategory();
+        void updateCategory(long id, String category);
+
+        void getCategoryToUpdate(Category category);
+
+        //void updateCategory(String category);
 
         void deleteCategory();
     }

@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
     private MainDatabase database;
     private AlertDialog alertDialog = null;
     private String category;
+    private boolean update;
 
     @BindView(R.id.tv_empty)
     TextView emptyTextView;
@@ -108,7 +110,32 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
     OnCategoryOnLongClicked mItemLongListener = new OnCategoryOnLongClicked() {
         @Override
         public void onCategoryLongClick(Category category) {
-            showItemDialog();
+            //Get the ID of the category and category to update in the Room
+            long categoryId = category.getId();
+            String category1 = category.getCategory();
+
+            //Create an alert dialog builder
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+            //Set title value
+            builder.setTitle("Select Options")
+                    .setItems(new String[]{"Update", "Delete"}, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch(which){
+                                case 0:
+                                    mPresenter.getCategoryToUpdate(category);
+                                    Toast.makeText(getContext(), "Selected", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 1:
+                                    Toast.makeText(getContext(), "Chosen", Toast.LENGTH_SHORT).show();
+                                    break;
+                            }
+                        }
+                    }).show();
+
+            alertDialog = builder.create();
+            alertDialog.show();
         }
     };
 
@@ -142,6 +169,41 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
     @Override
     public void showEmptyMessage() {
         emptyTextView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showCategoryToUpdate(Category category) {
+
+        long id = category.getId();
+
+        //Create an alert dialog builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        //Set title value
+        builder.setTitle("Update Category");
+
+        //Get custom view
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.add_category_dialog, null);
+        builder.setView(dialogView);
+
+        final EditText editText = dialogView.findViewById(R.id.category_name);
+        final Button addCategory = dialogView.findViewById(R.id.add_category);
+
+        editText.setText(category.getCategory());
+        addCategory.setText("Update");
+
+        addCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.updateCategory(id, editText.getText().toString());
+                Toast.makeText(getActivity(), editText.getText().toString() + " has been added successfully", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), CategoriesActivity.class));
+                //alertDialog.dismiss();
+            }
+        });
+        alertDialog = builder.create();
+        alertDialog.show();
     }
 
 
@@ -182,38 +244,6 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
         });
         alertDialog = builder.create();
         alertDialog.show();
-    }
-
-    public void showItemDialog(){
-        //Create an alert dialog builder
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-
-        //Set title value
-        builder.setTitle("Select Options")
-                .setItems(new String[]{"Update", "Delete"}, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch(which){
-                            case 0:
-                                Toast.makeText(getContext(), "Selected", Toast.LENGTH_SHORT).show();
-                                break;
-                            case 1:
-                                Toast.makeText(getContext(), "Chosen", Toast.LENGTH_SHORT).show();
-                                break;
-                        }
-                    }
-                }).show();
-
-        alertDialog = builder.create();
-        alertDialog.show();
-
-        //Get custom view
-        /*LayoutInflater inflater = getActivity().getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.add_category_dialog, null);
-        builder.setView(dialogView);
-
-        final EditText editText = dialogView.findViewById(R.id.category_name);
-        final Button addCategory = dialogView.findViewById(R.id.add_category);*/
     }
 
 }
