@@ -3,9 +3,7 @@ package pars.androidquizapp.categories;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
-import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +18,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import pars.androidquizapp.R;
 import pars.androidquizapp.data.Category;
-import pars.androidquizapp.data.Question;
-import pars.androidquizapp.questions.QuestionsContract;
 
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoryViewHolder> {
@@ -61,11 +57,12 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     public void onBindViewHolder(CategoryViewHolder holder, int position) {
         randomColor();
         Category result = categoryList.get(position);
+        long id = result.getId();
         holder.categoryTitle.setText(result.getCategory());
         holder.relativeLayout.setBackgroundColor(color);
 
         holder.playButton.setOnClickListener(v -> {
-            onCategoryClicked.onPlayButtonClicked(result);
+            onCategoryClicked.onPlayButtonClicked(id);
         });
     }
 
@@ -129,7 +126,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     public interface OnCategoryClicked {
         void onCategoryClick(long categoryId);
 
-        void onPlayButtonClicked(Category category);
+        void onPlayButtonClicked(long categoryId);
     }
 
     public interface OnCategoryOnLongClicked {

@@ -44,11 +44,7 @@ public class CategoriesPresenter implements CategoriesContract.Presenter {
 
     @Override
     public void updateCategory(long id, String category) {
-        Log.e("UPDATE ID", Long.toString(id));
-        Log.e("UPDATE CATEGORY", category);
         categoryDao.updateCategory(id, category);
-        Log.e("NEWLY UPDATED ID", Long.toString(id));
-        Log.e("NEWLY UPDATED CATEGORY", category);
     }
 
     @Override

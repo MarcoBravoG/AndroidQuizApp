@@ -36,7 +36,7 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View 
     private List<Question> questions = new ArrayList<>();
     private PlayQuizAdapter playQuizAdapter;
     private LinearLayoutManager linearLayoutManager;
-    private String category;
+    private long categoryId;
     private AlertDialog alertDialog = null;
     private FloatingActionButton fab;
 
@@ -109,7 +109,7 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        category = getActivity().getIntent().getExtras().getString("category");
+        categoryId = getActivity().getIntent().getExtras().getLong("categoryId");
 
         fab = getActivity().findViewById(R.id.fab);
 
@@ -135,7 +135,7 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View 
     @Override
     public void onStart() {
         super.onStart();
-        //mPresenter.fetchQuestions(category);
+        mPresenter.fetchQuestions(categoryId);
     }
 
     @Override
@@ -152,7 +152,7 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View 
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(getContext(), AddQuestionActivity.class);
-                    intent.putExtra("category", category);
+                    intent.putExtra("categoryId", categoryId);
                     startActivity(intent);
                 }
             });

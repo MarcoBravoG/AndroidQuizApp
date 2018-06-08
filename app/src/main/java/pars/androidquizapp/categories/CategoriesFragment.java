@@ -90,18 +90,15 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
     OnCategoryClicked mItemListener = new OnCategoryClicked() {
         @Override
         public void onCategoryClick(long categoryId) {
-
-            Log.e("UPDATED ID FOR INTENT", Long.toString(categoryId));
-            Toast.makeText(getContext(), category + " id: " + Long.toString(categoryId), Toast.LENGTH_LONG).show();
             Intent intent = new Intent(getContext(), QuestionsActivity.class);
             intent.putExtra("categoryId", categoryId);
             startActivity(intent);
         }
 
         @Override
-        public void onPlayButtonClicked(Category category) {
+        public void onPlayButtonClicked(long categoryId) {
             Intent intent = new Intent(getContext(), PlayQuizActivity.class);
-            intent.putExtra("category", category.getCategory());
+            intent.putExtra("categoryId", categoryId);
             startActivity(intent);
         }
     };
