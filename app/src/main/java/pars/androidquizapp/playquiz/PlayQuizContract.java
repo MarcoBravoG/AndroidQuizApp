@@ -20,7 +20,7 @@ public interface PlayQuizContract {
 
     interface Presenter extends BasePresenter {
 
-        void fetchQuestions(String category);
+        //void fetchQuestions(String category);
 
         void calculateScore();
 

@@ -20,8 +20,8 @@ public interface QuestionDao {
     @Query("SELECT * FROM questions_table")
     List<Question> getAllQuestions();
 
-    @Query("SELECT * FROM questions_table WHERE questionCategory = :questionCategory")
-    List<Question> queryQuestion(String questionCategory);
+    @Query("SELECT * FROM questions_table WHERE id = :id")
+    List<Question> fetchQuestion(long id);
 
     @Query("SELECT * FROM questions_table WHERE id = :id")
     Question queryQuestion(long id);

@@ -135,7 +135,7 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View 
     @Override
     public void onStart() {
         super.onStart();
-        mPresenter.fetchQuestions(category);
+        //mPresenter.fetchQuestions(category);
     }
 
     @Override

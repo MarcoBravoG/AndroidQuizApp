@@ -19,8 +19,8 @@ public class QuestionsPresenter implements QuestionsContract.Presenter {
     }
 
     @Override
-    public void fetchQuestions(String category) {
-        List<Question> questionList = questionDao.queryQuestion(category);
+    public void fetchQuestions(long categoryId) {
+        List<Question> questionList = questionDao.fetchQuestion(categoryId);
         mView.showAllQuestions(questionList);
     }
 

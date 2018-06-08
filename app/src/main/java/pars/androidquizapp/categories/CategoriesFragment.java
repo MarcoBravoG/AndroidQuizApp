@@ -89,10 +89,12 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
      */
     OnCategoryClicked mItemListener = new OnCategoryClicked() {
         @Override
-        public void onCategoryClick(Category onClickCategory) {
-            category = onClickCategory.getCategory();
+        public void onCategoryClick(long categoryId) {
+
+            Log.e("UPDATED ID FOR INTENT", Long.toString(categoryId));
+            Toast.makeText(getContext(), category + " id: " + Long.toString(categoryId), Toast.LENGTH_LONG).show();
             Intent intent = new Intent(getContext(), QuestionsActivity.class);
-            intent.putExtra("category", category);
+            intent.putExtra("categoryId", categoryId);
             startActivity(intent);
         }
 
@@ -110,9 +112,6 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
     OnCategoryOnLongClicked mItemLongListener = new OnCategoryOnLongClicked() {
         @Override
         public void onCategoryLongClick(Category category) {
-            //Get the ID of the category and category to update in the Room
-            long categoryId = category.getId();
-            String category1 = category.getCategory();
 
             //Create an alert dialog builder
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -175,6 +174,7 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
     public void showCategoryToUpdate(Category category) {
 
         long id = category.getId();
+        Log.e("ID TO BE UPDATED", Long.toString(id));
 
         //Create an alert dialog builder
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -199,7 +199,6 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
                 mPresenter.updateCategory(id, editText.getText().toString());
                 Toast.makeText(getActivity(), editText.getText().toString() + " has been added successfully", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getActivity(), CategoriesActivity.class));
-                //alertDialog.dismiss();
             }
         });
         alertDialog = builder.create();

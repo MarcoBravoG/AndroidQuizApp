@@ -81,20 +81,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     public void setValues(List<Category> values){
         categoryList = values;
         notifyDataSetChanged();
-
-        /*if(categoryList != null) {
-            Log.e("THIS IS IT:", categoryList.toString());
-            Log.e("THIS IS IT:", newData.toString());
-
-            PostDiffCallback postDiffCallback = new PostDiffCallback(categoryList, newData);
-            DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(postDiffCallback);
-
-            categoryList.clear();
-            categoryList.addAll(newData);
-            diffResult.dispatchUpdatesTo(this);
-            notifyDataSetChanged();
-            }*/
-
     }
 
 
@@ -105,6 +91,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
             implements View.OnClickListener, View.OnLongClickListener {
 
         Category category;
+        long categoryId;
 
         @BindView(R.id.relative)
         RelativeLayout relativeLayout;
@@ -125,7 +112,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         public void onClick(View v) {
             int position = getAdapterPosition();
             category = getItem(position);
-            onCategoryClicked.onCategoryClick(category);
+            categoryId = category.getId();
+            onCategoryClicked.onCategoryClick(categoryId);
         }
 
 
@@ -139,7 +127,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     }
 
     public interface OnCategoryClicked {
-        void onCategoryClick(Category category);
+        void onCategoryClick(long categoryId);
 
         void onPlayButtonClicked(Category category);
     }
@@ -149,38 +137,5 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         void onCategoryLongClick(Category category);
     }
 
-
-    /**
-     * DiffUtil is a class to compare lists in the recyclerview
-     */
-    /*class PostDiffCallback extends DiffUtil.Callback {
-
-        private final List<Category> oldCategories, newCategories;
-
-        public PostDiffCallback(List<Category> oldCategories, List<Category> newCategories) {
-            this.oldCategories = oldCategories;
-            this.newCategories = newCategories;
-        }
-
-        @Override
-        public int getOldListSize() {
-            return oldCategories.size();
-        }
-
-        @Override
-        public int getNewListSize() {
-            return newCategories.size();
-        }
-
-        @Override
-        public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-            return oldCategories.get(oldItemPosition).getId() == newCategories.get(newItemPosition).getId();
-        }
-
-        @Override
-        public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-            return oldCategories.get(oldItemPosition).equals(newCategories.get(newItemPosition));
-        }
-    */
 
 }

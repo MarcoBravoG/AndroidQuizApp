@@ -19,11 +19,11 @@ public class PlayQuizPresenter implements PlayQuizContract.Presenter {
     }
 
 
-    @Override
+    /*@Override
     public void fetchQuestions(String category) {
         List<Question> questionList = questionDao.queryQuestion(category);
         mView.showQuestions(questionList);
-    }
+    }*/
 
     @Override
     public void calculateScore() {

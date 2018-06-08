@@ -32,8 +32,6 @@ public interface CategoriesContract {
 
         void getCategoryToUpdate(Category category);
 
-        //void updateCategory(String category);
-
         void deleteCategory();
     }
 }

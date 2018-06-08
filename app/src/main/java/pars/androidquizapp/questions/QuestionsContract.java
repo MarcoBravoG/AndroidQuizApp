@@ -20,7 +20,7 @@ public interface QuestionsContract {
 
     interface Presenter extends BasePresenter {
 
-        void fetchQuestions(String category);
+        void fetchQuestions(long categoryId);
 
         void addQuestion();
 

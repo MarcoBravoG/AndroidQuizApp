@@ -32,6 +32,7 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
     private List<Question> questions = new ArrayList<>();
     private QuestionsAdapter questionsAdapter;
     private String category;
+    private long categoryId;
 
     @BindView(R.id.tv_empty)
     TextView emptyTextView;
@@ -87,7 +88,8 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        category = getActivity().getIntent().getExtras().getString("category");
+        //category = getActivity().getIntent().getExtras().getString("category");
+        categoryId = getActivity().getIntent().getExtras().getLong("categoryId");
 
         FloatingActionButton fab = getActivity().findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +103,7 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
     @Override
     public void onStart() {
         super.onStart();
-        mPresenter.fetchQuestions(category);
+        mPresenter.fetchQuestions(categoryId);
     }
 
     @Override
@@ -128,7 +130,8 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
     @Override
     public void showAddQuestion() {
         Intent intent = new Intent(getContext(), AddQuestionActivity.class);
-        intent.putExtra("category", category);
+        intent.putExtra("categoryId", categoryId);
+        //intent.putExtra("category", category);
         startActivity(intent);
     }
 

@@ -35,6 +35,7 @@ public class AddQuestionFragment extends Fragment implements AddQuestionContract
 
     public static List<String> data = new ArrayList<String>();
     String category;
+    long categoryId;
 
     @BindView(R.id.category_type)
     TextView categoryType;
@@ -90,7 +91,8 @@ public class AddQuestionFragment extends Fragment implements AddQuestionContract
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        category = getActivity().getIntent().getExtras().getString("category");
+        //category = getActivity().getIntent().getExtras().getString("category");
+        categoryId = getActivity().getIntent().getExtras().getLong("categoryId");
 
         categoryType.setText("Category: " + category);
         btnQuestion.setOnClickListener(new View.OnClickListener() {
