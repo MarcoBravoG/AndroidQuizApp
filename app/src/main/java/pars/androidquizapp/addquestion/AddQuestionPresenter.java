@@ -17,10 +17,10 @@ public class AddQuestionPresenter implements AddQuestionContract.Presenter{
     }
 
     @Override
-    public void saveQuestion(String category, String question, String optionA,
+    public void saveQuestion(long categoryId, String question, String optionA,
                             String optionB, String optionC, String optionD, String answer) {
 
-        Question questionParams = new Question(category, question, optionA,
+        Question questionParams = new Question(categoryId, question, optionA,
                 optionB, optionC, optionD, answer);
         questionDao.insert(questionParams);
     }

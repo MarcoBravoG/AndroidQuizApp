@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,6 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
     private MainDatabase database;
     private List<Question> questions = new ArrayList<>();
     private QuestionsAdapter questionsAdapter;
-    private String category;
     private long categoryId;
 
     @BindView(R.id.tv_empty)
@@ -88,8 +88,8 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //category = getActivity().getIntent().getExtras().getString("category");
         categoryId = getActivity().getIntent().getExtras().getLong("categoryId");
+        Log.e("CATEGORY ID 2", Long.toString(categoryId));
 
         FloatingActionButton fab = getActivity().findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +131,6 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
     public void showAddQuestion() {
         Intent intent = new Intent(getContext(), AddQuestionActivity.class);
         intent.putExtra("categoryId", categoryId);
-        //intent.putExtra("category", category);
         startActivity(intent);
     }
 

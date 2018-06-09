@@ -90,6 +90,7 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
     OnCategoryClicked mItemListener = new OnCategoryClicked() {
         @Override
         public void onCategoryClick(long categoryId) {
+            Log.e("CATEGORY ID 1", Long.toString(categoryId));
             Intent intent = new Intent(getContext(), QuestionsActivity.class);
             intent.putExtra("categoryId", categoryId);
             startActivity(intent);
@@ -108,7 +109,7 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
      */
     OnCategoryOnLongClicked mItemLongListener = new OnCategoryOnLongClicked() {
         @Override
-        public void onCategoryLongClick(Category category) {
+        public void onCategoryLongClick(Category onClickCategory) {
 
             //Create an alert dialog builder
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -120,7 +121,7 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
                         public void onClick(DialogInterface dialog, int which) {
                             switch(which){
                                 case 0:
-                                    mPresenter.getCategoryToUpdate(category);
+                                    mPresenter.getCategoryToUpdate(onClickCategory);
                                     Toast.makeText(getContext(), "Selected", Toast.LENGTH_SHORT).show();
                                     break;
                                 case 1:
@@ -171,7 +172,6 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
     public void showCategoryToUpdate(Category category) {
 
         long id = category.getId();
-        Log.e("ID TO BE UPDATED", Long.toString(id));
 
         //Create an alert dialog builder
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());

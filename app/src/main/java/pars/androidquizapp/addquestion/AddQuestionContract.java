@@ -13,7 +13,7 @@ public interface AddQuestionContract {
 
     interface Presenter extends BasePresenter{
 
-        void saveQuestion(String Category, String Question, String optionA,
+        void saveQuestion(long categoryId, String question, String optionA,
                          String optionB, String optionC,String optionD,
                          String answer);
 

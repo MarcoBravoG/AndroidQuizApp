@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -110,6 +111,7 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View 
         super.onActivityCreated(savedInstanceState);
 
         categoryId = getActivity().getIntent().getExtras().getLong("categoryId");
+        Log.e("CATEGORY ID 4", Long.toString(categoryId));
 
         fab = getActivity().findViewById(R.id.fab);
 

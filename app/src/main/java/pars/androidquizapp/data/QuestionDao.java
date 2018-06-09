@@ -17,11 +17,11 @@ public interface QuestionDao {
     @Insert(onConflict = REPLACE)
     long insert(Question question);
 
-    @Query("SELECT * FROM questions_table WHERE id = :id")
-    List<Question> fetchQuestion(long id);
+    @Query("SELECT * FROM questions_table")
+    List<Question> getAllQuestions();
 
-    /*@Query("SELECT * FROM questions_table WHERE id = :id")
-    Question queryQuestion(long id);*/
+    @Query("SELECT * FROM questions_table WHERE category_id = :categoryId")
+    List<Question> fetchQuestion(long categoryId);
 
     @Update
     void updateQuestion(Question question);

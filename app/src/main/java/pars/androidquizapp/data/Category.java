@@ -18,9 +18,6 @@ public class Category implements Serializable{
     @ColumnInfo(name = "category")
     String category;
 
-    @ColumnInfo(name = "number_of_question_in_this_category")
-    int numberOfQuestionInThisCategory;
-
 
     public Category(String category) {
         this.category = category;
@@ -42,20 +39,12 @@ public class Category implements Serializable{
         this.category = category;
     }
 
-    public int getNumberOfQuestionInThisCategory() {
-        return numberOfQuestionInThisCategory;
-    }
-
-    public void setNumberOfQuestionInThisCategory(int numberOfQuestionInThisCategory) {
-        this.numberOfQuestionInThisCategory = numberOfQuestionInThisCategory;
-    }
 
     @Override
     public String toString() {
         return "Category{" +
                 "id=" + id +
                 ", category='" + category + '\'' +
-                ", numberOfQuestionInThisCategory=" + numberOfQuestionInThisCategory +
                 '}';
     }
 

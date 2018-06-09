@@ -34,11 +34,8 @@ public class AddQuestionFragment extends Fragment implements AddQuestionContract
     private MainDatabase database;
 
     public static List<String> data = new ArrayList<String>();
-    String category;
     long categoryId;
 
-    @BindView(R.id.category_type)
-    TextView categoryType;
     @BindView(R.id.question)
     EditText question;
     @BindView(R.id.opta)
@@ -91,10 +88,9 @@ public class AddQuestionFragment extends Fragment implements AddQuestionContract
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //category = getActivity().getIntent().getExtras().getString("category");
         categoryId = getActivity().getIntent().getExtras().getLong("categoryId");
+        Log.e("CATEGORY ID 3", Long.toString(categoryId));
 
-        categoryType.setText("Category: " + category);
         btnQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,7 +101,7 @@ public class AddQuestionFragment extends Fragment implements AddQuestionContract
                 String optionD = optD.getText().toString();
                 String answer = ans.getText().toString().toLowerCase();
 
-                mPresenter.saveQuestion(category, newQuestion, optionA, optionB,
+                mPresenter.saveQuestion(categoryId, newQuestion, optionA, optionB,
                         optionC, optionD, answer);
                 startActivity(new Intent(getActivity(), CategoriesActivity.class));
             }

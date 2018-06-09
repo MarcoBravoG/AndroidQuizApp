@@ -2,20 +2,26 @@ package pars.androidquizapp.data;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 
 
-@Entity(tableName = "questions_table")
+@Entity(tableName = "questions_table", foreignKeys =
+@ForeignKey(entity = Category.class, parentColumns = "id", childColumns = "category_id"))
 public class Question implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     long id;
 
-    @ColumnInfo(name = "questionCategory")
-    String questionCategory;
+    /*@ColumnInfo(name = "questionCategory")
+    String questionCategory;*/
+
+    @NonNull
+    @ColumnInfo(name = "category_id")
+    long categoryId;
 
     @NonNull
     @ColumnInfo(name = "question")
@@ -26,10 +32,10 @@ public class Question implements Serializable {
     String optionD;
     String answerOoption;
 
-    public Question(String questionCategory, String question,
+    public Question(long categoryId, String question,
                     String optionA, String optionB, String optionC,
                     String optionD, String answerOoption) {
-        this.questionCategory = questionCategory;
+        this.categoryId = categoryId;
         this.question = question;
         this.optionA = optionA;
         this.optionB = optionB;
@@ -46,12 +52,13 @@ public class Question implements Serializable {
         this.id = id;
     }
 
-    public String getQuestionCategory() {
-        return questionCategory;
+    @NonNull
+    public long getCategoryId() {
+        return categoryId;
     }
 
-    public void setQuestionCategory(String questionCategory) {
-        this.questionCategory = questionCategory;
+    public void setCategoryId(@NonNull long categoryId) {
+        this.categoryId = categoryId;
     }
 
     @NonNull
@@ -108,7 +115,7 @@ public class Question implements Serializable {
     public String toString() {
         return "Question{" +
                 "id=" + id +
-                ", questionCategory='" + questionCategory + '\'' +
+                ", categoryId='" + categoryId + '\'' +
                 ", question='" + question + '\'' +
                 ", optionA='" + optionA + '\'' +
                 ", optionB='" + optionB + '\'' +

@@ -11,12 +11,6 @@
         android:paddingRight="24dp"
         android:paddingTop="56dp">
 
-        <TextView
-            android:id="@+id/category_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/category_text_size" />
-
         <EditText
             android:id="@+id/question"
             android:layout_width="match_parent"
