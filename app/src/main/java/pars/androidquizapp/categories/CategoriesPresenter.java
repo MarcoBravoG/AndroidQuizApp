@@ -1,7 +1,5 @@
 package pars.androidquizapp.categories;
 
-import android.util.Log;
-
 import java.util.List;
 
 import pars.androidquizapp.data.Category;
@@ -55,8 +53,8 @@ public class CategoriesPresenter implements CategoriesContract.Presenter {
 
     @Override
     public void deleteCategory(long categoryId) {
+        categoryDao.deleteCategoryFromQuestion(categoryId);
         categoryDao.deleteCategory(categoryId);
-        categoryDao.insertEmptyCategory(categoryId);
     }
 
 }

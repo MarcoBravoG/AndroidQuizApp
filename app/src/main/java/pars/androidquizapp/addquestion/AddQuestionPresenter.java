@@ -25,6 +25,17 @@ public class AddQuestionPresenter implements AddQuestionContract.Presenter{
         questionDao.insert(questionParams);
     }
 
+    @Override
+    public void fetchQuestionToUpdate(long id) {
+        Question questionList = questionDao.queryQuestion(id);
+        mView.showQuestionToUpdate(questionList);
+    }
+
+    @Override
+    public void updateQuestion(Question question) {
+        questionDao.updateQuestion(question);
+    }
+
 
     @Override
     public void start() {

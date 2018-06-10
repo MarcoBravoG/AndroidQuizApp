@@ -30,7 +30,6 @@ public class PlayQuizAdapter extends RecyclerView.Adapter<PlayQuizAdapter.PlayQu
 
     private int correctScore = 0;
     private int incorrectScore = 0;
-    private int emptyScore = 0;
 
 
     public PlayQuizAdapter(Context context, List<Question> questionList) {

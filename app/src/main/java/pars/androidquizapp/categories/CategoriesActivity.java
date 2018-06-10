@@ -37,8 +37,5 @@ public class CategoriesActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        /*if(exit){
-            finish();
-        }*/
     }
 }

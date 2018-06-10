@@ -9,7 +9,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,8 +100,10 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
         }
     };
 
+
     /**
      * Listener for onLongclick on a category in the RecyclerView.
+     * This enables to select options to Update and Delete category
      */
     OnCategoryOnLongClicked mItemLongListener = new OnCategoryOnLongClicked() {
         @Override
@@ -124,7 +125,7 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
                                     break;
                                 case 1:
                                     mPresenter.deleteCategory(id);
-                                    Toast.makeText(getContext(), categoryName + " deleted", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), categoryName + " has been deleted", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(getActivity(), CategoriesActivity.class));
                                     alertDialog.dismiss();
                                     break;
@@ -169,6 +170,7 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
         emptyTextView.setVisibility(View.VISIBLE);
     }
 
+    //This shows the category to update when an Update item is selected from the alert dialog
     @Override
     public void showCategoryToUpdate(Category category) {
 

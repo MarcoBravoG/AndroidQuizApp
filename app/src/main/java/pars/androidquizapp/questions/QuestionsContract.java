@@ -16,6 +16,8 @@ public interface QuestionsContract {
         void showEmptyMessage();
 
         void showAddQuestion();
+
+        void showQuestionToUpdate(long questionId);
     }
 
     interface Presenter extends BasePresenter {
@@ -24,7 +26,7 @@ public interface QuestionsContract {
 
         void addQuestion();
 
-        void updateQuestion();
+        void getQuestionToUpdate(long questionId);
 
         void deleteQuestion(Question question);
     }

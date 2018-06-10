@@ -25,13 +25,9 @@ public interface CategoryDao {
     void updateCategory(long id, String category);
 
     @Query("DELETE FROM questions_table WHERE category_id = :categoryId")
-    void deleteCategory(long categoryId);
+    void deleteCategoryFromQuestion(long categoryId);
 
     @Query("DELETE FROM categories_table WHERE id = :id")
-    void insertEmptyCategory(long id);
-
-
-    /*@Delete
-    void deleteCategory(Category category);*/
+    void deleteCategory(long id);
 
 }

@@ -16,9 +16,6 @@ public class Question implements Serializable {
     @PrimaryKey(autoGenerate = true)
     long id;
 
-    /*@ColumnInfo(name = "questionCategory")
-    String questionCategory;*/
-
     @NonNull
     @ColumnInfo(name = "category_id")
     long categoryId;
