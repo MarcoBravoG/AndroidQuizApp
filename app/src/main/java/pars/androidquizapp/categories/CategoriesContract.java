@@ -18,6 +18,7 @@ public interface CategoriesContract {
         void showEmptyMessage();
 
         void showCategoryToUpdate(Category category);
+
     }
 
     interface Presenter extends BasePresenter {
@@ -32,6 +33,7 @@ public interface CategoriesContract {
 
         void getCategoryToUpdate(Category category);
 
-        void deleteCategory();
+        void deleteCategory(Category category);
+
     }
 }

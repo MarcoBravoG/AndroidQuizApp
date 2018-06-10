@@ -90,7 +90,6 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
     OnCategoryClicked mItemListener = new OnCategoryClicked() {
         @Override
         public void onCategoryClick(long categoryId) {
-            Log.e("CATEGORY ID 1", Long.toString(categoryId));
             Intent intent = new Intent(getContext(), QuestionsActivity.class);
             intent.putExtra("categoryId", categoryId);
             startActivity(intent);
@@ -111,6 +110,7 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
         @Override
         public void onCategoryLongClick(Category onClickCategory) {
 
+            String categoryName = onClickCategory.getCategory();
             //Create an alert dialog builder
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
@@ -122,10 +122,11 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
                             switch(which){
                                 case 0:
                                     mPresenter.getCategoryToUpdate(onClickCategory);
-                                    Toast.makeText(getContext(), "Selected", Toast.LENGTH_SHORT).show();
                                     break;
                                 case 1:
-                                    Toast.makeText(getContext(), "Chosen", Toast.LENGTH_SHORT).show();
+                                    mPresenter.deleteCategory(onClickCategory);
+                                    Toast.makeText(getContext(), categoryName + " deleted", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(getActivity(), CategoriesActivity.class));
                                     break;
                             }
                         }

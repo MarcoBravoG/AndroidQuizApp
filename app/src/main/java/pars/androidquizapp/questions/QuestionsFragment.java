@@ -89,7 +89,6 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
         super.onActivityCreated(savedInstanceState);
 
         categoryId = getActivity().getIntent().getExtras().getLong("categoryId");
-        Log.e("CATEGORY ID 2", Long.toString(categoryId));
 
         FloatingActionButton fab = getActivity().findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

@@ -76,8 +76,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     }
 
     public void setValues(List<Category> values){
-        categoryList = values;
-        notifyDataSetChanged();
+            categoryList = values;
+            notifyDataSetChanged();
     }
 
 

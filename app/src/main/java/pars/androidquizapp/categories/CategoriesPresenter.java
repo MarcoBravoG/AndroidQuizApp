@@ -54,9 +54,8 @@ public class CategoriesPresenter implements CategoriesContract.Presenter {
 
 
     @Override
-    public void deleteCategory() {
-
+    public void deleteCategory(Category category) {
+        categoryDao.deleteCategory(category);
     }
-
 
 }

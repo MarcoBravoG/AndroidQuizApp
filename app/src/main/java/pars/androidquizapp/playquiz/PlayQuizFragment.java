@@ -111,7 +111,6 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View 
         super.onActivityCreated(savedInstanceState);
 
         categoryId = getActivity().getIntent().getExtras().getLong("categoryId");
-        Log.e("CATEGORY ID 4", Long.toString(categoryId));
 
         fab = getActivity().findViewById(R.id.fab);
 
