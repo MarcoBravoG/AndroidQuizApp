@@ -33,7 +33,7 @@ public interface CategoriesContract {
 
         void getCategoryToUpdate(Category category);
 
-        void deleteCategory(Category category);
+        void deleteCategory(long categoryId);
 
     }
 }

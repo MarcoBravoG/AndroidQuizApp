@@ -37,8 +37,8 @@ public class QuestionsPresenter implements QuestionsContract.Presenter {
     }
 
     @Override
-    public void deleteQuestion() {
-
+    public void deleteQuestion(Question question) {
+        questionDao.deleteQuestion(question);
     }
 
     @Override

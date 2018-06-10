@@ -20,12 +20,12 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
 
     private Context context;
     private List<Question> questionList;
-    private OnQuestionClicked onQuestionClicked;
+    private QuestionOnLongClicked questionOnLongClicked;
 
-    public QuestionsAdapter(Context context, List<Question> questionList, OnQuestionClicked onQuestionClicked) {
+    public QuestionsAdapter(Context context, List<Question> questionList, QuestionOnLongClicked questionOnLongClicked) {
         this.context = context;
         this.questionList = questionList;
-        this.onQuestionClicked = onQuestionClicked;
+        this.questionOnLongClicked = questionOnLongClicked;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
         notifyDataSetChanged();
     }
 
-    public class QuestionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class QuestionViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
 
         @BindView(R.id.db_question)
         TextView question;
@@ -78,18 +78,19 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
         public QuestionViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
-        public void onClick(View v) {
+        public boolean onLongClick(View v) {
             int position = getAdapterPosition();
             Question question = getItem(position);
-            onQuestionClicked.onQuestionClick(question);
+            questionOnLongClicked.questionOnLongClick(question);
+            return false;
         }
     }
 
-    public interface OnQuestionClicked {
-        void onQuestionClick(Question question);
+    public interface QuestionOnLongClicked {
+        void questionOnLongClick(Question question);
     }
 }

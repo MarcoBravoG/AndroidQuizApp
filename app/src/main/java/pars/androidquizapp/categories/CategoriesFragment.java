@@ -40,8 +40,6 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
     private List<Category> categories = new ArrayList<>();
     private MainDatabase database;
     private AlertDialog alertDialog = null;
-    private String category;
-    private boolean update;
 
     @BindView(R.id.tv_empty)
     TextView emptyTextView;
@@ -111,6 +109,7 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
         public void onCategoryLongClick(Category onClickCategory) {
 
             String categoryName = onClickCategory.getCategory();
+            long id = onClickCategory.getId();
             //Create an alert dialog builder
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
@@ -124,9 +123,10 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
                                     mPresenter.getCategoryToUpdate(onClickCategory);
                                     break;
                                 case 1:
-                                    mPresenter.deleteCategory(onClickCategory);
+                                    mPresenter.deleteCategory(id);
                                     Toast.makeText(getContext(), categoryName + " deleted", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(getActivity(), CategoriesActivity.class));
+                                    alertDialog.dismiss();
                                     break;
                             }
                         }

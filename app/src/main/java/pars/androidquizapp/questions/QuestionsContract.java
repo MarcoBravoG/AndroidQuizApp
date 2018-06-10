@@ -26,6 +26,6 @@ public interface QuestionsContract {
 
         void updateQuestion();
 
-        void deleteQuestion();
+        void deleteQuestion(Question question);
     }
 }

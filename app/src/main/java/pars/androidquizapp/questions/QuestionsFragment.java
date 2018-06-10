@@ -1,6 +1,8 @@
 package pars.androidquizapp.questions;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +24,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import pars.androidquizapp.R;
 import pars.androidquizapp.addquestion.AddQuestionActivity;
-import pars.androidquizapp.questions.QuestionsAdapter.OnQuestionClicked;
+import pars.androidquizapp.categories.CategoriesActivity;
+import pars.androidquizapp.questions.QuestionsAdapter.QuestionOnLongClicked;
 import pars.androidquizapp.data.MainDatabase;
 import pars.androidquizapp.data.Question;
 
@@ -32,6 +36,7 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
     private MainDatabase database;
     private List<Question> questions = new ArrayList<>();
     private QuestionsAdapter questionsAdapter;
+    private AlertDialog alertDialog = null;
     private long categoryId;
 
     @BindView(R.id.tv_empty)
@@ -77,10 +82,32 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
     /**
      * Listener for clicks on questions in the RecyclerView.
      */
-    OnQuestionClicked mItemListener = new OnQuestionClicked() {
+    QuestionOnLongClicked mItemListener = new QuestionOnLongClicked() {
         @Override
-        public void onQuestionClick(Question question) {
+        public void questionOnLongClick(Question question) {
 
+            //Create an alert dialog builder
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+            //Set title value
+            builder.setTitle("Select Options")
+                    .setItems(new String[]{"Update", "Delete"}, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch(which){
+                                case 0:
+                                    break;
+                                case 1:
+                                    mPresenter.deleteQuestion(question);
+                                    startActivity(new Intent(getActivity(), QuestionsActivity.class));
+                                    alertDialog.dismiss();
+                                    break;
+                            }
+                        }
+                    }).show();
+
+            alertDialog = builder.create();
+            alertDialog.show();
         }
     };
 
@@ -108,6 +135,7 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
     @Override
     public void onResume() {
         super.onResume();
+        mPresenter.fetchQuestions(categoryId);
     }
 
 
