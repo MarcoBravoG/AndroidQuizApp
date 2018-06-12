@@ -1,6 +1,8 @@
 package pars.androidquizapp.questions;
 
 
+import android.util.Log;
+
 import java.util.List;
 
 import pars.androidquizapp.data.Question;
@@ -19,8 +21,8 @@ public class QuestionsPresenter implements QuestionsContract.Presenter {
     }
 
     @Override
-    public void fetchQuestions(String category) {
-        List<Question> questionList = questionDao.queryQuestion(category);
+    public void fetchQuestions(long categoryId) {
+        List<Question> questionList = questionDao.fetchQuestion(categoryId);
         mView.showAllQuestions(questionList);
     }
 
@@ -29,14 +31,15 @@ public class QuestionsPresenter implements QuestionsContract.Presenter {
         mView.showAddQuestion();
     }
 
-    @Override
-    public void updateQuestion() {
 
+    @Override
+    public void getQuestionToUpdate(long questionId) {
+        mView.showQuestionToUpdate(questionId);
     }
 
     @Override
-    public void deleteQuestion() {
-
+    public void deleteQuestion(Question question) {
+        questionDao.deleteQuestion(question);
     }
 
     @Override

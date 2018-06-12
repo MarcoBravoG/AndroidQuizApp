@@ -16,16 +16,18 @@ public interface QuestionsContract {
         void showEmptyMessage();
 
         void showAddQuestion();
+
+        void showQuestionToUpdate(long questionId);
     }
 
     interface Presenter extends BasePresenter {
 
-        void fetchQuestions(String category);
+        void fetchQuestions(long categoryId);
 
         void addQuestion();
 
-        void updateQuestion();
+        void getQuestionToUpdate(long questionId);
 
-        void deleteQuestion();
+        void deleteQuestion(Question question);
     }
 }

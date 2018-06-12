@@ -4,9 +4,10 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
-import android.arch.persistence.room.Update;
 
 import java.util.List;
+
+import retrofit2.http.DELETE;
 
 import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 
@@ -20,10 +21,13 @@ public interface CategoryDao {
     @Query("SELECT * FROM categories_table")
     List<Category> getAllCategories();
 
-    @Update
-    void updateCategory(Category category);
+    @Query("UPDATE categories_table SET category = :category WHERE id = :id")
+    void updateCategory(long id, String category);
 
-    @Delete
-    void deleteCategory(Category category);
+    @Query("DELETE FROM questions_table WHERE category_id = :categoryId")
+    void deleteCategoryFromQuestion(long categoryId);
+
+    @Query("DELETE FROM categories_table WHERE id = :id")
+    void deleteCategory(long id);
 
 }

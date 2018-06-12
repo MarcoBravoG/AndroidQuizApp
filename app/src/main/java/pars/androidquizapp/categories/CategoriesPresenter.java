@@ -41,14 +41,19 @@ public class CategoriesPresenter implements CategoriesContract.Presenter {
     }
 
     @Override
-    public void updateCategory() {
-
+    public void updateCategory(long id, String category) {
+        categoryDao.updateCategory(id, category);
     }
 
     @Override
-    public void deleteCategory() {
-
+    public void getCategoryToUpdate(Category category) {
+       mCategoriesView.showCategoryToUpdate(category);
     }
 
+    @Override
+    public void deleteCategory(long categoryId) {
+        categoryDao.deleteCategoryFromQuestion(categoryId);
+        categoryDao.deleteCategory(categoryId);
+    }
 
 }

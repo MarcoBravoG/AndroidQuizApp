@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,9 +37,10 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View 
     private List<Question> questions = new ArrayList<>();
     private PlayQuizAdapter playQuizAdapter;
     private LinearLayoutManager linearLayoutManager;
-    private String category;
+    private long categoryId;
     private AlertDialog alertDialog = null;
     private FloatingActionButton fab;
+
 
     /**
      * This makes button show at the end of a recylerview item
@@ -51,10 +53,23 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View 
 
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-            if (dy > 0 && linearLayoutManager.findLastVisibleItemPosition() == playQuizAdapter.getItemCount() - 1) {
+
+            //These are sets of conditions for submit button visibility
+            if (dy > 0 && linearLayoutManager.findLastVisibleItemPosition() ==
+                    playQuizAdapter.getItemCount() - 1) {
                 submitButton.setVisibility(View.VISIBLE);
+
+            } else if(dy == 0 && linearLayoutManager.findLastVisibleItemPosition() == 0
+                    && (playQuizAdapter.getItemCount() - 1) == 0){
+                submitButton.setVisibility(View.VISIBLE);
+
+            } else if(dy == 0 && linearLayoutManager.findLastVisibleItemPosition() == 1
+                    && (playQuizAdapter.getItemCount() - 1) == 1){
+                submitButton.setVisibility(View.VISIBLE);
+
             } else {
                 submitButton.setVisibility(View.GONE);
+
             }
         }
     };
@@ -100,7 +115,6 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View 
         playQuizAdapter = new PlayQuizAdapter(getActivity(), questions);
         recyclerView.setAdapter(playQuizAdapter);
         recyclerView.addOnScrollListener(scrollListener);
-        recyclerView.invalidate();
 
         return root;
     }
@@ -109,7 +123,7 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        category = getActivity().getIntent().getExtras().getString("category");
+        categoryId = getActivity().getIntent().getExtras().getLong("categoryId");
 
         fab = getActivity().findViewById(R.id.fab);
 
@@ -135,7 +149,7 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View 
     @Override
     public void onStart() {
         super.onStart();
-        mPresenter.fetchQuestions(category);
+        mPresenter.fetchQuestions(categoryId);
     }
 
     @Override
@@ -152,8 +166,9 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View 
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(getContext(), AddQuestionActivity.class);
-                    intent.putExtra("category", category);
+                    intent.putExtra("categoryId", categoryId);
                     startActivity(intent);
+                    getActivity().finish();
                 }
             });
         } else {

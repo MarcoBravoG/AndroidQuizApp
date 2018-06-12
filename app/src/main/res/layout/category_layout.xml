@@ -31,7 +31,8 @@
                 android:textColor="@color/white"
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="@dimen/activity_vertical_margin"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:maxLines="15"/>
 
         </RelativeLayout>
 

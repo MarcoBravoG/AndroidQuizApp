@@ -18,7 +18,7 @@ public class AddQuestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_question);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
@@ -39,6 +39,5 @@ public class AddQuestionActivity extends AppCompatActivity {
         fragmentTransaction.add(R.id.content_frame_layout, addQuestionFragment);
         fragmentTransaction.commit();
     }
-
 
 }

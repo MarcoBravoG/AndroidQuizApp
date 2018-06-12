@@ -18,8 +18,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import pars.androidquizapp.R;
 import pars.androidquizapp.data.Category;
-import pars.androidquizapp.data.Question;
-import pars.androidquizapp.questions.QuestionsContract;
 
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoryViewHolder> {
@@ -27,13 +25,16 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     private Context context;
     private List<Category> categoryList;
     private OnCategoryClicked onCategoryClicked;
+    private OnCategoryOnLongClicked onLongClicked;
     private int color;
 
 
-    public CategoriesAdapter(Context context, List<Category> categoryList, OnCategoryClicked onCategoryClicked){
+    public CategoriesAdapter(Context context, List<Category> categoryList,
+                             OnCategoryClicked onCategoryClicked, OnCategoryOnLongClicked onLongClicked){
         this.context = context;
         this.categoryList = categoryList;
         this.onCategoryClicked = onCategoryClicked;
+        this.onLongClicked = onLongClicked;
     }
 
     public void randomColor(){
@@ -56,11 +57,12 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     public void onBindViewHolder(CategoryViewHolder holder, int position) {
         randomColor();
         Category result = categoryList.get(position);
+        long id = result.getId();
         holder.categoryTitle.setText(result.getCategory());
         holder.relativeLayout.setBackgroundColor(color);
 
         holder.playButton.setOnClickListener(v -> {
-            onCategoryClicked.onPlayButtonClicked(result);
+            onCategoryClicked.onPlayButtonClicked(id);
         });
     }
 
@@ -74,17 +76,19 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     }
 
     public void setValues(List<Category> values){
-        categoryList = values;
-        notifyDataSetChanged();
+            categoryList = values;
+            notifyDataSetChanged();
     }
 
 
     /**
     * ViewHolder class
      **/
-    public class CategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class CategoryViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener, View.OnLongClickListener {
 
         Category category;
+        long categoryId;
 
         @BindView(R.id.relative)
         RelativeLayout relativeLayout;
@@ -98,22 +102,37 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
             ButterKnife.bind(this, itemView);
 
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
             category = getItem(position);
-            onCategoryClicked.onCategoryClick(category);
+            categoryId = category.getId();
+            onCategoryClicked.onCategoryClick(categoryId);
         }
 
 
+        @Override
+        public boolean onLongClick(View v) {
+            int position = getAdapterPosition();
+            category = getItem(position);
+            onLongClicked.onCategoryLongClick(category);
+            return false;
+        }
     }
 
     public interface OnCategoryClicked {
-        void onCategoryClick(Category category);
+        void onCategoryClick(long categoryId);
 
-        void onPlayButtonClicked(Category category);
+        void onPlayButtonClicked(long categoryId);
     }
+
+    public interface OnCategoryOnLongClicked {
+
+        void onCategoryLongClick(Category category);
+    }
+
 
 }

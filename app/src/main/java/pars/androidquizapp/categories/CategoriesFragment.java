@@ -1,6 +1,7 @@
 package pars.androidquizapp.categories;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,6 +26,7 @@ import pars.androidquizapp.R;
 import pars.androidquizapp.data.Category;
 import pars.androidquizapp.data.MainDatabase;
 import pars.androidquizapp.categories.CategoriesAdapter.OnCategoryClicked;
+import pars.androidquizapp.categories.CategoriesAdapter.OnCategoryOnLongClicked;
 import pars.androidquizapp.playquiz.PlayQuizActivity;
 import pars.androidquizapp.questions.QuestionsActivity;
 
@@ -72,7 +74,7 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
         ButterKnife.bind(this, root);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        categoriesAdapter = new CategoriesAdapter(getActivity(), categories, mItemListener);
+        categoriesAdapter = new CategoriesAdapter(getActivity(), categories, mItemListener, mItemLongListener);
         recyclerView.setAdapter(categoriesAdapter);
         recyclerView.invalidate();
 
@@ -80,24 +82,63 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
     }
 
     /**
-     * Listener for clicks on categories in the RecyclerView.
+     * Listener for onClick on a category in the RecyclerView.
      */
     OnCategoryClicked mItemListener = new OnCategoryClicked() {
         @Override
-        public void onCategoryClick(Category category) {
+        public void onCategoryClick(long categoryId) {
             Intent intent = new Intent(getContext(), QuestionsActivity.class);
-            intent.putExtra("category", category.getCategory());
+            intent.putExtra("categoryId", categoryId);
             startActivity(intent);
         }
 
         @Override
-        public void onPlayButtonClicked(Category category) {
+        public void onPlayButtonClicked(long categoryId) {
             Intent intent = new Intent(getContext(), PlayQuizActivity.class);
-            intent.putExtra("category", category.getCategory());
+            intent.putExtra("categoryId", categoryId);
             startActivity(intent);
         }
     };
 
+
+    /**
+     * Listener for onLongclick on a category in the RecyclerView.
+     * This enables to select options to Update and Delete category
+     */
+    OnCategoryOnLongClicked mItemLongListener = new OnCategoryOnLongClicked() {
+        @Override
+        public void onCategoryLongClick(Category onClickCategory) {
+
+            String categoryName = onClickCategory.getCategory();
+            long id = onClickCategory.getId();
+            //Create an alert dialog builder
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+            //Set title value
+            builder.setTitle("Select Options")
+                    .setItems(new String[]{"Update", "Delete"}, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch(which){
+                                case 0:
+                                    mPresenter.getCategoryToUpdate(onClickCategory);
+                                    dialog.dismiss();
+                                    break;
+                                case 1:
+                                    mPresenter.deleteCategory(id);
+                                    Toast.makeText(getContext(), categoryName + " has been deleted", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+                                    Intent intent = new Intent(getActivity(), CategoriesActivity.class);
+                                    startActivity(intent);
+                                    break;
+                            }
+                        }
+                    });
+
+            alertDialog = builder.create();
+            alertDialog.show();
+        }
+    };
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -125,10 +166,46 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
         mPresenter.fetchCategories();
     }
 
-
     @Override
     public void showEmptyMessage() {
         emptyTextView.setVisibility(View.VISIBLE);
+    }
+
+    //This shows the category to update when an Update item is selected from the alert dialog
+    @Override
+    public void showCategoryToUpdate(Category category) {
+
+        long id = category.getId();
+
+        //Create an alert dialog builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        //Set title value
+        builder.setTitle("Update Category");
+
+        //Get custom view
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.add_category_dialog, null);
+        builder.setView(dialogView);
+
+        final EditText editText = dialogView.findViewById(R.id.category_name);
+        final Button addCategory = dialogView.findViewById(R.id.add_category);
+
+        editText.setText(category.getCategory());
+        addCategory.setText("Update");
+
+        addCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.updateCategory(id, editText.getText().toString());
+                Toast.makeText(getActivity(), editText.getText().toString() + " has been added successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), CategoriesActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+        alertDialog = builder.create();
+        alertDialog.show();
     }
 
 
@@ -149,7 +226,7 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
         //Set title value
-        builder.setTitle("Add Categories");
+        builder.setTitle("Add Category");
 
         //Get custom view
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -164,7 +241,9 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
             public void onClick(View v) {
                 mPresenter.saveNewCategory(editText.getText().toString());
                 Toast.makeText(getActivity(), editText.getText().toString() + " has been added successfully", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getActivity(), CategoriesActivity.class));
+                Intent intent = new Intent(getActivity(), CategoriesActivity.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         });
         alertDialog = builder.create();

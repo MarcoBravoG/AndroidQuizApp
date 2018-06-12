@@ -11,7 +11,6 @@ import pars.androidquizapp.R;
 
 public class CategoriesActivity extends AppCompatActivity {
 
-    //private Boolean exit = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +33,4 @@ public class CategoriesActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        /*if(exit){
-            finish();
-        }*/
-    }
 }

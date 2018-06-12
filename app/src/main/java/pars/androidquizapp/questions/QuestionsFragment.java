@@ -1,6 +1,8 @@
 package pars.androidquizapp.questions;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import pars.androidquizapp.R;
 import pars.androidquizapp.addquestion.AddQuestionActivity;
-import pars.androidquizapp.questions.QuestionsAdapter.OnQuestionClicked;
+import pars.androidquizapp.questions.QuestionsAdapter.QuestionOnLongClicked;
 import pars.androidquizapp.data.MainDatabase;
 import pars.androidquizapp.data.Question;
 
@@ -31,7 +33,8 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
     private MainDatabase database;
     private List<Question> questions = new ArrayList<>();
     private QuestionsAdapter questionsAdapter;
-    private String category;
+    private AlertDialog alertDialog = null;
+    private long categoryId;
 
     @BindView(R.id.tv_empty)
     TextView emptyTextView;
@@ -75,19 +78,48 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
 
     /**
      * Listener for clicks on questions in the RecyclerView.
+     * This enables to select options to Update and delete question
      */
-    OnQuestionClicked mItemListener = new OnQuestionClicked() {
-        @Override
-        public void onQuestionClick(Question question) {
+    QuestionOnLongClicked mItemListener = new QuestionOnLongClicked() {
 
+        @Override
+        public void questionOnLongClick(Question question) {
+
+            long id = question.getId();
+
+            //Create an alert dialog builder
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+            builder.setTitle("Select Options")
+                    .setCancelable(true)
+                    .setItems(new String[]{"Update", "Delete"}, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch(which){
+                                case 0:
+                                    mPresenter.getQuestionToUpdate(id);
+                                    dialog.dismiss();
+                                    break;
+                                case 1:
+                                    mPresenter.deleteQuestion(question);
+                                    dialog.dismiss();
+                                    getActivity().recreate();
+                                    break;
+                            }
+                        }
+                    });
+
+            alertDialog = builder.create();
+            alertDialog.show();
         }
     };
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        category = getActivity().getIntent().getExtras().getString("category");
+        categoryId = getActivity().getIntent().getExtras().getLong("categoryId");
 
         FloatingActionButton fab = getActivity().findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -101,12 +133,13 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
     @Override
     public void onStart() {
         super.onStart();
-        mPresenter.fetchQuestions(category);
+        mPresenter.fetchQuestions(categoryId);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        mPresenter.fetchQuestions(categoryId);
     }
 
 
@@ -128,7 +161,14 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
     @Override
     public void showAddQuestion() {
         Intent intent = new Intent(getContext(), AddQuestionActivity.class);
-        intent.putExtra("category", category);
+        intent.putExtra("categoryId", categoryId);
+        startActivity(intent);
+    }
+
+    @Override
+    public void showQuestionToUpdate(long questionId) {
+        Intent intent = new Intent(getActivity(), AddQuestionActivity.class);
+        intent.putExtra("question_id", questionId);
         startActivity(intent);
     }
 
