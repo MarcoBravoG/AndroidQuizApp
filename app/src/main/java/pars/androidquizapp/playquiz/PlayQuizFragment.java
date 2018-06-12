@@ -41,6 +41,7 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View 
     private AlertDialog alertDialog = null;
     private FloatingActionButton fab;
 
+
     /**
      * This makes button show at the end of a recylerview item
      */
@@ -52,10 +53,23 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View 
 
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-            if (dy > 0 && linearLayoutManager.findLastVisibleItemPosition() == playQuizAdapter.getItemCount() - 1) {
+
+            //These are sets of conditions for submit button visibility
+            if (dy > 0 && linearLayoutManager.findLastVisibleItemPosition() ==
+                    playQuizAdapter.getItemCount() - 1) {
                 submitButton.setVisibility(View.VISIBLE);
+
+            } else if(dy == 0 && linearLayoutManager.findLastVisibleItemPosition() == 0
+                    && (playQuizAdapter.getItemCount() - 1) == 0){
+                submitButton.setVisibility(View.VISIBLE);
+
+            } else if(dy == 0 && linearLayoutManager.findLastVisibleItemPosition() == 1
+                    && (playQuizAdapter.getItemCount() - 1) == 1){
+                submitButton.setVisibility(View.VISIBLE);
+
             } else {
                 submitButton.setVisibility(View.GONE);
+
             }
         }
     };
@@ -101,7 +115,6 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View 
         playQuizAdapter = new PlayQuizAdapter(getActivity(), questions);
         recyclerView.setAdapter(playQuizAdapter);
         recyclerView.addOnScrollListener(scrollListener);
-        recyclerView.invalidate();
 
         return root;
     }
@@ -155,6 +168,7 @@ public class PlayQuizFragment extends Fragment implements PlayQuizContract.View 
                     Intent intent = new Intent(getContext(), AddQuestionActivity.class);
                     intent.putExtra("categoryId", categoryId);
                     startActivity(intent);
+                    getActivity().finish();
                 }
             });
         } else {

@@ -35,7 +35,13 @@ public class QuestionsActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.content_frame_layout, questionFragment);
+        //fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
+
+    /*@Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }*/
 
 }

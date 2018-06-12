@@ -4,6 +4,7 @@ package pars.androidquizapp.playquiz;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,6 @@ public class PlayQuizAdapter extends RecyclerView.Adapter<PlayQuizAdapter.PlayQu
     private List<Question> questionList;
     public RadioButton radioButton;
     ArrayList<Integer> answersQuestions = new ArrayList<>();
-
     List<AnswerModel> selectedIds = new ArrayList<>();
 
     private int correctScore = 0;

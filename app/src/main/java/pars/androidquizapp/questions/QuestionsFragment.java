@@ -100,7 +100,9 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
                                     break;
                                 case 1:
                                     mPresenter.deleteQuestion(question);
-                                    startActivity(new Intent(getActivity(), QuestionsActivity.class));
+                                    Intent intent = new Intent(getActivity(), QuestionsActivity.class);
+                                    startActivity(intent);
+                                    getActivity().finish();
                                     alertDialog.dismiss();
                                     break;
                             }
@@ -160,6 +162,7 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
         Intent intent = new Intent(getContext(), AddQuestionActivity.class);
         intent.putExtra("categoryId", categoryId);
         startActivity(intent);
+        getActivity().finish();
     }
 
     @Override
@@ -167,6 +170,7 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
         Intent intent = new Intent(getActivity(), AddQuestionActivity.class);
         intent.putExtra("question_id", questionId);
         startActivity(intent);
+        getActivity().finish();
     }
 
 }

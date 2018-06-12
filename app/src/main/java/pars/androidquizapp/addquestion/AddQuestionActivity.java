@@ -40,5 +40,4 @@ public class AddQuestionActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-
 }
