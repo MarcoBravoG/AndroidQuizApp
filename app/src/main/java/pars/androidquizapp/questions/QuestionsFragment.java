@@ -81,38 +81,39 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
      * This enables to select options to Update and delete question
      */
     QuestionOnLongClicked mItemListener = new QuestionOnLongClicked() {
+
         @Override
         public void questionOnLongClick(Question question) {
 
             long id = question.getId();
-            //Create an alert dialog builder
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-            //Set title value
+            //Create an alert dialog builder
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
             builder.setTitle("Select Options")
+                    .setCancelable(true)
                     .setItems(new String[]{"Update", "Delete"}, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             switch(which){
                                 case 0:
                                     mPresenter.getQuestionToUpdate(id);
-                                    alertDialog.dismiss();
+                                    dialog.dismiss();
                                     break;
                                 case 1:
                                     mPresenter.deleteQuestion(question);
-                                    Intent intent = new Intent(getActivity(), QuestionsActivity.class);
-                                    startActivity(intent);
-                                    getActivity().finish();
-                                    alertDialog.dismiss();
+                                    dialog.dismiss();
+                                    getActivity().recreate();
                                     break;
                             }
                         }
-                    }).show();
+                    });
 
             alertDialog = builder.create();
             alertDialog.show();
         }
     };
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -162,7 +163,6 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
         Intent intent = new Intent(getContext(), AddQuestionActivity.class);
         intent.putExtra("categoryId", categoryId);
         startActivity(intent);
-        getActivity().finish();
     }
 
     @Override
@@ -170,7 +170,6 @@ public class QuestionsFragment extends Fragment implements QuestionsContract.Vie
         Intent intent = new Intent(getActivity(), AddQuestionActivity.class);
         intent.putExtra("question_id", questionId);
         startActivity(intent);
-        getActivity().finish();
     }
 
 }

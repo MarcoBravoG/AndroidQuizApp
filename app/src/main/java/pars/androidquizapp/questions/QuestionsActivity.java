@@ -16,7 +16,7 @@ public class QuestionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
@@ -35,13 +35,6 @@ public class QuestionsActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.content_frame_layout, questionFragment);
-        //fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
-
-    /*@Override
-    public void onBackPressed() {
-        moveTaskToBack(true);
-    }*/
-
 }

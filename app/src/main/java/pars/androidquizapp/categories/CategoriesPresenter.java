@@ -50,7 +50,6 @@ public class CategoriesPresenter implements CategoriesContract.Presenter {
        mCategoriesView.showCategoryToUpdate(category);
     }
 
-
     @Override
     public void deleteCategory(long categoryId) {
         categoryDao.deleteCategoryFromQuestion(categoryId);

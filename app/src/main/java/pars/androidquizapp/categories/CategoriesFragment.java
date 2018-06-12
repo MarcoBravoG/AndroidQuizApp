@@ -90,7 +90,6 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
             Intent intent = new Intent(getContext(), QuestionsActivity.class);
             intent.putExtra("categoryId", categoryId);
             startActivity(intent);
-            getActivity().finish();
         }
 
         @Override
@@ -98,7 +97,6 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
             Intent intent = new Intent(getContext(), PlayQuizActivity.class);
             intent.putExtra("categoryId", categoryId);
             startActivity(intent);
-            getActivity().finish();
         }
     };
 
@@ -124,19 +122,18 @@ public class CategoriesFragment extends Fragment implements CategoriesContract.V
                             switch(which){
                                 case 0:
                                     mPresenter.getCategoryToUpdate(onClickCategory);
-                                    alertDialog.dismiss();
+                                    dialog.dismiss();
                                     break;
                                 case 1:
                                     mPresenter.deleteCategory(id);
                                     Toast.makeText(getContext(), categoryName + " has been deleted", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
                                     Intent intent = new Intent(getActivity(), CategoriesActivity.class);
                                     startActivity(intent);
-                                    getActivity().finish();
-                                    alertDialog.dismiss();
                                     break;
                             }
                         }
-                    }).show();
+                    });
 
             alertDialog = builder.create();
             alertDialog.show();

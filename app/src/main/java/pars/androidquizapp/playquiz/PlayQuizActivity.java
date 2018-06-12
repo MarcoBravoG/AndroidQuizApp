@@ -37,8 +37,4 @@ public class PlayQuizActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    /*@Override
-    public void onBackPressed() {
-        moveTaskToBack(true);
-    }*/
 }
